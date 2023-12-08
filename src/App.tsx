@@ -7,6 +7,8 @@ import { useSyncPathToAtom } from './atoms'
 import { InfoPage } from './pages/Info.page'
 import { Page } from './components/Layouts'
 import { Navigation } from './components/Navigation'
+import { InventoryPage } from './pages/Inventory.page'
+import { SpellsPage } from './pages/Spells.page'
 
 const theme = createTheme({
   typography: {
@@ -28,7 +30,6 @@ const theme = createTheme({
   }
 })
 
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -42,6 +43,8 @@ function App() {
                   <Navigation />
                   <Routes>
                     <Route path="/info" element={<InfoPage />} />
+                    <Route path="/inventory" element={<InventoryPage />} />
+                    <Route path="/spells" element={<SpellsPage />} />
                   </Routes>
                 </Page>
               } />
