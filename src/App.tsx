@@ -1,23 +1,64 @@
-import { useState } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Suspense } from 'react'
+import CircularProgress from '@mui/material/CircularProgress'
+import { StartPage } from './pages/Start.page'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useSyncPathToAtom } from './atoms'
+import { InfoPage } from './pages/Info.page'
+import { Page } from './components/Layouts'
+import { Navigation } from './components/Navigation'
+
+const theme = createTheme({
+  typography: {
+    h1: {
+      fontSize: '2.5rem', // Set your desired size
+    },
+    h2: {
+      fontSize: '2rem',
+    },
+    h3: {
+      fontSize: '1.75rem',
+    },
+    h4: {
+      fontSize: '1.5rem',
+    },
+    h5: {
+      fontSize: '1.25rem',
+    }
+  }
+})
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <WithPathMatch>
+          <Suspense fallback={<CircularProgress />}>
+            <Routes>
+              <Route path="/" element={<StartPage />} />
+              <Route path="/character-sheet/:id/*" element={
+                <Page>
+                  <Navigation />
+                  <Routes>
+                    <Route path="/info" element={<InfoPage />} />
+                  </Routes>
+                </Page>
+              } />
+            </Routes>
+          </Suspense>
+        </WithPathMatch>
+      </BrowserRouter>
+    </ThemeProvider >
+  )
+}
+
+function WithPathMatch({ children }: { children: React.ReactNode }) {
+  useSyncPathToAtom()
+  return (
+    <div>
+      {children}
+    </div>
   )
 }
 
