@@ -2,6 +2,7 @@ import { useAtomValue } from 'jotai'
 import { characterSheetAtom, editModeAtom } from '../atoms'
 import { Diamond } from './Diamond'
 import { DieFace } from './DieFace'
+import { Typography } from '@mui/material'
 
 export function CombatInfo() {
   const { combatInfo } = useAtomValue(characterSheetAtom)
@@ -13,7 +14,7 @@ export function CombatInfo() {
 
   return (
     <section id="combatinfo" className="ch-box">
-      <h1 className="text-center text-xl font-bold mb-4">Combat Info</h1>
+      <Typography variant='h2'>Combat Info</Typography>
       <div className="flex flex-wrap justify-center items-center gap-4">
         <div className="flex flex-col m-4 gap-4 items-center">
           <Diamond>

@@ -2,6 +2,7 @@ import { Diamond } from './Diamond'
 import { characterSheetAtom, editModeAtom } from '../atoms'
 import { useAtomValue } from 'jotai'
 import { deCamel } from '../utils'
+import { Typography } from '@mui/material'
 
 
 export function SavingThrows() {
@@ -14,11 +15,11 @@ export function SavingThrows() {
 
   return (
     <section id="savingthrows" className="ch-box">
-      <h1 className="text-center font-bold text-xl">Saving Throws</h1>
-      <div className="flex flex-wrap justify-center">
+      <Typography variant='h2'>Saving Throws</Typography>
+      <div className="flex flex-wrap justify-center gap-4">
         {
           Object.entries(savingThrows).map(([name, { value }]) => (
-            <div key={name} className="flex flex-col w-32 m-4 gap-4 items-center">
+            <div key={name} className="flex flex-col w-32 gap-4 items-center">
               <span className="capitalize font-bold text-center whitespace-nowrap">{deCamel(name)}</span>
               <Diamond>
                 {isEditMode

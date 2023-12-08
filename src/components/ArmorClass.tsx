@@ -1,5 +1,6 @@
 import { useAtomValue } from "jotai"
 import { characterSheetAtom, editModeAtom } from "../atoms"
+import { Typography } from "@mui/material"
 
 export function ArmorClass() {
   const { armorClasses } = useAtomValue(characterSheetAtom)
@@ -11,7 +12,7 @@ export function ArmorClass() {
 
   return (
     <section id="armorclass" className="ch-box">
-      <h1 className="text-xl text-center font-bold mb-4">Armor Class</h1>
+      <Typography variant='h2'>Armor Class</Typography>
       <div className="flex">
         <div className="flex flex-col items-center w-24">
           {isEditMode

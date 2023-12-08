@@ -1,18 +1,22 @@
 import { useAtomValue } from "jotai"
 import { characterSheetAtom } from "../atoms"
+import { calculateEncumbrance, deCamel, encumbranceValueToState } from "../utils"
+import { Typography } from "@mui/material"
 
 export function Encumbrance() {
-  const { encumbrance } = useAtomValue(characterSheetAtom)
-  const description = descriptions[encumbrance.state]
+  const characterSheet = useAtomValue(characterSheetAtom)
+  const value = calculateEncumbrance(characterSheet)
+  const state = encumbranceValueToState(value)
+  const description = descriptions[state]
 
   return (
     <section id="encumbrance" className="ch-box">
-      <h1 className="text-xl font-bold text-center mb-4">Encumbrance</h1>
+      <Typography variant='h2'>Encumbrance</Typography>
       <div className="grid grid-cols-2 gap-x-4">
         <span className="justify-self-end">State</span>
-        <span>{encumbrance.state}</span>
+        <span className="capitalize">{deCamel(state)}</span>
         <span className="justify-self-end">Points</span>
-        <span>{encumbrance.value}</span>
+        <span>{value}</span>
         <span className="justify-self-end">Explore</span>
         <span>{description.explore}</span>
         <span className="justify-self-end">Combat</span>
@@ -51,7 +55,7 @@ const descriptions = {
     running: "30 ft/round",
     perDay: "6 miles"
   },
-  overencumbered: {
+  overEncumbered: {
     explore: "0 ft/turn",
     combat: "0 ft/round",
     running: "0 ft/round",

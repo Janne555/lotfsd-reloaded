@@ -2,6 +2,7 @@ import { useAtomValue } from "jotai"
 import React from "react"
 import { characterSheetAtom, editModeAtom } from "../atoms"
 import { deCamel } from "../utils"
+import { Typography } from "@mui/material"
 
 export function InfoBar() {
   const { info } = useAtomValue(characterSheetAtom)
@@ -12,16 +13,16 @@ export function InfoBar() {
   }
 
   return (
-    <section id="infobar" className="ch-box p-2">
-      <h1 className="text-center font-bold text-xl mb-4">Basic Info</h1>
+    <section id="infobar" className="ch-box">
+      <Typography variant="h2">Basic Info</Typography>
       <div className="grid grid-cols-2 gap-2">
         {
           Object.entries(info).map(([key, value]) => (
             <React.Fragment key={key}>
-              <span className="capitalize justify-self-end">{deCamel(key)}</span>
+              <span className="capitalize  items-start">{deCamel(key)}</span>
               {isEditMode
                 ? <input value={value ?? ""} onChange={e => handleChange(key as any, e.target.value)} className="" />
-                : <span className="justify-self-start">{value}</span>
+                : <span>{value}</span>
               }
             </React.Fragment>
           ))

@@ -30,29 +30,28 @@ const ActivitySchema = z.object({
 })
 
 const EncumbranceSchema = z.object({
-  value: z.number(),
-  state: z.enum([
-    "unencumbered",
-    "lightlyEncumbered",
-    "heavilyEncumbered",
-    "severelyEncumbered",
-    "overencumbered",
-  ]),
+  characterIsWearingChainMail: z.boolean(),
+  characterIsWearingPlateMail: z.boolean()
 })
 
 const LanguageSchema = z.object({
   isKnown: z.boolean(),
   name: z.string(),
+  id: z.string(),
 })
 
 const ItemSchema = z.object({
   name: z.string(),
+  oversized: z.boolean(),
+  id: z.string(),
 })
 
 const WeaponSchema = z.object({
   name: z.string(),
-  attackBonus: z.number(),
+  attackBonus: z.number().min(-100).max(100),
   damage: z.string(),
+  oversized: z.boolean(),
+  id: z.string(),
   range: z
     .object({
       short: z.string().optional(),
@@ -67,6 +66,7 @@ const SpellSchema = z.object({
   description: z.string(),
   prepared: z.boolean(),
   level: z.number(),
+  id: z.string(),
 })
 
 const CombatOptionSchema = z.object({

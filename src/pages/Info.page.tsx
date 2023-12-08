@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material"
 import { Activities } from "../components/Activities"
 import { ArmorClass } from "../components/ArmorClass"
 import { Attributes } from "../components/Attributes"
@@ -11,9 +12,9 @@ import { SavingThrows } from "../components/SavingThrows"
 export const InfoPage = () => {
   return (
     <div className="flex flex-col gap-y-4">
-      <section className="ch-box p-4">
-        <h1 className="text-xl font-bold text-center mb-4">Page Content</h1>
-        <div className="flex flex-wrap gap-4 justify-center">
+      <section className="ch-box">
+        <Typography variant="h2">Page Content</Typography>
+        <div className="flex flex-wrap gap-4 items-start">
           <a href="#infobar">Basic Info</a>
           <a href="#attributes">Attributes</a>
           <a href="#savingthrows">Saving Throws</a>

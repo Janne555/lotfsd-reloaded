@@ -11,11 +11,11 @@ export function Attributes() {
   }
 
   return (
-    <section id="attributes" className="ch-box py-4 flex flex-col gap-y-4">
-      <Typography variant='h2' className="text-center font-bold text-xl">Attributes</Typography>
+    <section id="attributes" className="ch-box">
+      <Typography variant='h2'>Attributes</Typography>
       {
         Object.entries(attributes).map(([name, { value, modifier }]) => (
-          <div key={name} className="grid grid-cols-12 items-center content-center">
+          <div key={name} className="grid grid-cols-12 items-center">
             <span className="col-span-4 capitalize place-self-center">{name}</span>
             <div className="row-start-2 col-span-4 place-self-center border w-14 h-14 flex items-center justify-center">
               {isEditMode

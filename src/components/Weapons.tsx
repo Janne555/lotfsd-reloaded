@@ -1,11 +1,12 @@
 import { useAtomValue } from "jotai"
 import { characterSheetAtom } from "../atoms"
+import { Typography } from "@mui/material"
 
 export function Weapons() {
   const { weapons } = useAtomValue(characterSheetAtom)
   return (
     <section id="weapons" className="ch-box p-2 py-4">
-      <h1 className="text-center text-xl font-bold mb-4">Weapons</h1>
+      <Typography variant="h2">Weapons</Typography>
       <div className="flex flex-col gap-x-2">
         {weapons.map((weapon, i) => (
           <div key={i} className="grid grid-cols-12 border-b last:border-b-0">

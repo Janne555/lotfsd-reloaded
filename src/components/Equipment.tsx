@@ -1,6 +1,7 @@
 import { useAtomValue } from "jotai"
 import { chunk } from "../utils"
 import { characterSheetAtom } from "../atoms"
+import { Typography } from "@mui/material"
 
 export function Equipment() {
   const { equipment } = useAtomValue(characterSheetAtom)
@@ -14,7 +15,7 @@ export function Equipment() {
 
   return (
     <section id="equipment" className="ch-box">
-      <h1 className="text-center text-xl font-bold mb-4">Equipment</h1>
+      <Typography variant="h2">Equipment</Typography>
       {chunks.map((chunk, i) => (
         <div key={i} className="grid grid-cols-8">
           <div className="col-start-8 row-start-1 row-end-6 border relative">

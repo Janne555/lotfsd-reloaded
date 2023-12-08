@@ -9,9 +9,7 @@ export function Activities() {
 
   return (
     <Box id="activities" className="ch-box">
-      <Typography variant="h4" align="center" gutterBottom>
-        Common Activities
-      </Typography>
+      <Typography variant="h2">Common Activities</Typography>
       <Box className="flex flex-wrap justify-center gap-4">
         {Object.entries(activities).map(([name, { value }]) => (
           <Box key={name} className="w-24 flex flex-col items-center justify-items-center">

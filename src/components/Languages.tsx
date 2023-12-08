@@ -1,6 +1,7 @@
 import { useAtomValue } from "jotai"
 import { characterSheetAtom } from "../atoms"
 import { partition } from "../utils"
+import { Typography } from "@mui/material"
 
 export function Languages() {
   const { languages } = useAtomValue(characterSheetAtom)
@@ -8,20 +9,20 @@ export function Languages() {
 
   return (
     <section id="languages" className="ch-box">
-      <h1 className="font-bold text-xl text-center mb-4">Languages</h1>
+      <Typography variant="h2">Languages</Typography>
       <div className="grid grid-cols-2">
         <div className="flex flex-col">
-          <span className="text-center font-semibold">Known</span>
+          <span className="font-semibold">Known</span>
           {known.map(lang => (
-            <span key={lang.name} className="col-start-1 text-center border-r border-t truncate">{
+            <span key={lang.name} className="col-start-1 border-r border-t truncate">{
               lang.name}
             </span>
           ))}
         </div>
         <div className="flex flex-col">
-          <span className="text-center font-semibold">Not Known</span>
+          <span className="font-semibold">Not Known</span>
           {notKnown.map(lang => (
-            <span key={lang.name} className="col-start-2 row-start-auto text-center border-t truncate">
+            <span key={lang.name} className="col-start-2 row-start-auto border-t truncate">
               {lang.name}
             </span>
           ))}

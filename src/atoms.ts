@@ -38,7 +38,6 @@ export const characterIdAtom = pathMatchAtom('/character-sheet/:id/*')
 
 export const characterSheetAtom = atom(async (get) => {
   const characterId = get(characterIdAtom)
-  console.log(characterId)
   const characterSheets = await get(characterSheetsAtom)
   const sheet = characterSheets.find((sheet) => sheet.id === characterId?.params.id)
   if (!sheet) throw Promise.resolve("Pending")
