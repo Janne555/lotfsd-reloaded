@@ -5,7 +5,7 @@ export function CombatOptions() {
   const { combatOptions } = useAtomValue(characterSheetAtom)
 
   return (
-    <section className="ch-box p-8">
+    <section id="combatoptions" className="ch-box p-8">
       <h1 className="text-center text-xl font-bold mb-4">Combat Options</h1>
       <ul className="list-disc">
         {combatOptions.map((combatOption, i) => (

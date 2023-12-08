@@ -7,7 +7,7 @@ export function Languages() {
   const [known, notKnown] = partition(languages, lang => lang.isKnown)
 
   return (
-    <section className="ch-box">
+    <section id="languages" className="ch-box">
       <h1 className="font-bold text-xl text-center mb-4">Languages</h1>
       <div className="grid grid-cols-2">
         <div className="flex flex-col">

@@ -8,7 +8,7 @@ export function Activities() {
   const { activities } = useAtomValue(characterSheetAtom)
 
   return (
-    <Box className="ch-box">
+    <Box id="activities" className="ch-box">
       <Typography variant="h4" align="center" gutterBottom>
         Common Activities
       </Typography>

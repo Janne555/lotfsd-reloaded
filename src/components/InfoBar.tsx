@@ -12,7 +12,7 @@ export function InfoBar() {
   }
 
   return (
-    <section className="ch-box p-2">
+    <section id="infobar" className="ch-box p-2">
       <h1 className="text-center font-bold text-xl mb-4">Basic Info</h1>
       <div className="grid grid-cols-2 gap-2">
         {

@@ -10,7 +10,7 @@ export function ArmorClass() {
   }
 
   return (
-    <section className="ch-box">
+    <section id="armorclass" className="ch-box">
       <h1 className="text-xl text-center font-bold mb-4">Armor Class</h1>
       <div className="flex">
         <div className="flex flex-col items-center w-24">

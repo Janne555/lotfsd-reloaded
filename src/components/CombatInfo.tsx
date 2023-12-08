@@ -12,7 +12,7 @@ export function CombatInfo() {
   }
 
   return (
-    <section className="ch-box">
+    <section id="combatinfo" className="ch-box">
       <h1 className="text-center text-xl font-bold mb-4">Combat Info</h1>
       <div className="flex flex-wrap justify-center items-center gap-4">
         <div className="flex flex-col m-4 gap-4 items-center">

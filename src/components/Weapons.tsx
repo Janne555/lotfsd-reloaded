@@ -4,7 +4,7 @@ import { characterSheetAtom } from "../atoms"
 export function Weapons() {
   const { weapons } = useAtomValue(characterSheetAtom)
   return (
-    <section className="ch-box p-2 py-4">
+    <section id="weapons" className="ch-box p-2 py-4">
       <h1 className="text-center text-xl font-bold mb-4">Weapons</h1>
       <div className="flex flex-col gap-x-2">
         {weapons.map((weapon, i) => (

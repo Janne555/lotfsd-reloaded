@@ -13,7 +13,7 @@ export function Equipment() {
   }
 
   return (
-    <section className="ch-box">
+    <section id="equipment" className="ch-box">
       <h1 className="text-center text-xl font-bold mb-4">Equipment</h1>
       {chunks.map((chunk, i) => (
         <div key={i} className="grid grid-cols-8">

@@ -5,7 +5,7 @@ export function Spells() {
   const { spells } = useAtomValue(characterSheetAtom)
 
   return (
-    <section className="ch-box px-1 py-4">
+    <section id="spells" className="ch-box px-1 py-4">
       <h1 className="text-xl font-bold text-center mb-4">Spells</h1>
       <div className="grid grid-cols-12">
         <span className="col-span-7 font-bold">Name</span>

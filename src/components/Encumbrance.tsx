@@ -6,7 +6,7 @@ export function Encumbrance() {
   const description = descriptions[encumbrance.state]
 
   return (
-    <section className="ch-box">
+    <section id="encumbrance" className="ch-box">
       <h1 className="text-xl font-bold text-center mb-4">Encumbrance</h1>
       <div className="grid grid-cols-2 gap-x-4">
         <span className="justify-self-end">State</span>

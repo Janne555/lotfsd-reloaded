@@ -13,7 +13,7 @@ export function SavingThrows() {
   }
 
   return (
-    <section className="ch-box">
+    <section id="savingthrows" className="ch-box">
       <h1 className="text-center font-bold text-xl">Saving Throws</h1>
       <div className="flex flex-wrap justify-center">
         {
