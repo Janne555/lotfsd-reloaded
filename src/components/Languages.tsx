@@ -1,33 +1,40 @@
 import { useAtomValue } from "jotai"
 import { characterSheetAtom } from "../atoms"
-import { partition } from "../utils"
-import { Typography } from "@mui/material"
+import { partition } from "../utils/utils"
+import { IconButton, List, ListItem, ListItemText, Typography } from "@mui/material"
+import DeleteIcon from '@mui/icons-material/Delete'
+import { useMutateCharSheet } from "../hooks"
 
 export function Languages() {
   const { languages } = useAtomValue(characterSheetAtom)
   const [known, notKnown] = partition(languages, lang => lang.isKnown)
+  const mutateCharSheet = useMutateCharSheet()
+
+  const handleDelete = (name: string) => async () => {
+    await mutateCharSheet(draft => {
+      draft.languages = draft.languages.filter(lang => lang.name !== name)
+    })
+  }
 
   return (
     <section id="languages" className="ch-box">
       <Typography variant="h2">Languages</Typography>
-      <div className="grid grid-cols-2">
-        <div className="flex flex-col">
-          <span className="font-semibold">Known</span>
-          {known.map(lang => (
-            <span key={lang.name} className="col-start-1 border-r border-t truncate">{
-              lang.name}
-            </span>
-          ))}
-        </div>
-        <div className="flex flex-col">
-          <span className="font-semibold">Not Known</span>
-          {notKnown.map(lang => (
-            <span key={lang.name} className="col-start-2 row-start-auto border-t truncate">
-              {lang.name}
-            </span>
-          ))}
-        </div>
-      </div>
+      <Typography variant="h3">Known</Typography>
+      <List>
+        {known.map(lang => (
+          <ListItem key={lang.name} secondaryAction={<IconButton onClick={handleDelete(lang.name)}><DeleteIcon /></IconButton>}>
+            <ListItemText primary={lang.name} />
+          </ListItem>
+        ))}
+      </List>
+      <Typography variant="h3">Not Known</Typography>
+      <List>
+        {notKnown.map(lang => (
+          <ListItem key={lang.name} secondaryAction={<IconButton onClick={handleDelete(lang.name)}><DeleteIcon /></IconButton>}>
+            <ListItemText primary={lang.name} />
+          </ListItem>
+        ))}
+      </List>
     </section>
   )
 }

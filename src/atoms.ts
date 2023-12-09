@@ -2,6 +2,7 @@ import { Getter, atom, useSetAtom } from "jotai"
 import { getCharacterSheets } from "./pages/storage"
 import { matchPath, useLocation } from 'react-router-dom'
 import { useEffect } from "react"
+import { CharacterSheet } from "./types"
 
 export function atomWithRefresh<T>(fn: (get: Getter) => T) {
   const refreshCounter = atom(0)
@@ -32,7 +33,7 @@ export function useSyncPathToAtom() {
 
 const pathAtom = atom(window.location.pathname)
 
-export const characterSheetsAtom = atom(() => getCharacterSheets())
+export const characterSheetsAtom = atomWithRefresh(() => getCharacterSheets())
 
 export const characterIdAtom = pathMatchAtom('/character-sheet/:id/*')
 
@@ -45,3 +46,10 @@ export const characterSheetAtom = atom(async (get) => {
 })
 
 export const editModeAtom = atom(false)
+
+const tempCharacterSheetAtom = atom<CharacterSheet | undefined>(undefined)
+
+export const tempCharacterSheetReadWriteAtom = atom(
+  (get) => get(tempCharacterSheetAtom),
+  (_, set, update: CharacterSheet | undefined) => set(tempCharacterSheetAtom, update)
+)

@@ -1,16 +1,20 @@
 import { Diamond } from './Diamond'
-import { characterSheetAtom, editModeAtom } from '../atoms'
+import { characterSheetAtom } from '../atoms'
 import { useAtomValue } from 'jotai'
-import { deCamel } from '../utils'
+import { deCamel } from '../utils/utils'
 import { Typography } from '@mui/material'
+import { useEditMode, useMutateTempCharSheet } from '../hooks'
 
 
 export function SavingThrows() {
   const { savingThrows } = useAtomValue(characterSheetAtom)
-  const isEditMode = useAtomValue(editModeAtom)
+  const { isEditMode } = useEditMode()
+  const mutateCharSheet = useMutateTempCharSheet()
 
   const handleChange = (key: keyof typeof savingThrows, value: number) => {
-    console.log(key, value)
+    mutateCharSheet(draft => {
+      draft.savingThrows[key].value = value
+    })
   }
 
   return (
@@ -23,7 +27,7 @@ export function SavingThrows() {
               <span className="capitalize font-bold text-center whitespace-nowrap">{deCamel(name)}</span>
               <Diamond>
                 {isEditMode
-                  ? <input type="number" value={value} onChange={e => handleChange(name as any, e.target.valueAsNumber)} className="w-full" />
+                  ? <input type="number" defaultValue={value} onChange={e => handleChange(name as any, e.target.valueAsNumber)} className="w-full" />
                   : <span>{value}</span>
                 }
               </Diamond>

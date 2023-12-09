@@ -9,4 +9,19 @@
 - level up feature
 - include class information
 - effects
-  - increases / decreases to attributes, armor class, saving throws etc
+  - armor class
+  - hp
+  - saving throws
+  - effects from items
+  - encumbrance
+  - spell slots
+- item sharing via urls
+- rest button
+- class features
+  - they probably have effects
+  - track if they've been used
+- magic items
+  - have effects
+  - have cooldowns
+- notifications
+  - undo action

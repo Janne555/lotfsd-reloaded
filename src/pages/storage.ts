@@ -21,3 +21,18 @@ export async function getCharacterSheets(): Promise<CharacterSheet[]> {
     return []
   }
 }
+
+export async function saveCharacterSheet(characterSheet: CharacterSheet) {
+  try {
+    const characterSheets = await getCharacterSheets()
+    const index = characterSheets.findIndex((sheet) => sheet.id === characterSheet.id)
+    if (index === -1) {
+      characterSheets.push(characterSheet)
+    } else {
+      characterSheets[index] = characterSheet
+    }
+    await localForage.setItem('characterSheets', characterSheets)
+  } catch (error) {
+    console.error('Error saving character sheet:', error)
+  }
+}

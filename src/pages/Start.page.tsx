@@ -17,7 +17,8 @@ export const StartPage = () => {
   return (
     <Page>
       <Typography variant="h1">Lamentations of the Fullstack Developer</Typography>
-      <Box sx={{ minWidth: 120 }}>
+      <Box>
+        <Typography variant="h2">Character Sheets</Typography>
         <List>
           {characterSheets.map((characterSheet) => (
             <ListItem key={characterSheet.id} disablePadding>
@@ -31,7 +32,7 @@ export const StartPage = () => {
           ))}
         </List>
       </Box>
-      <Button variant="outlined" onClick={handleAddNew} className="self-center">Add New Character</Button>
+      <Button variant="outlined" onClick={handleAddNew} className="self-start">Add New Character</Button>
     </Page>
   )
 }

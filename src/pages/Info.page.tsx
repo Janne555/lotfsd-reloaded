@@ -8,6 +8,7 @@ import { Encumbrance } from "../components/Encumbrance"
 import { InfoBar } from "../components/InfoBar"
 import { Languages } from "../components/Languages"
 import { SavingThrows } from "../components/SavingThrows"
+import { Effects } from "../components/Effects"
 
 export const InfoPage = () => {
   return (
@@ -17,6 +18,7 @@ export const InfoPage = () => {
         <div className="flex flex-wrap gap-4 items-start">
           <a href="#infobar">Basic Info</a>
           <a href="#attributes">Attributes</a>
+          <a href="#attributes">Effects</a>
           <a href="#savingthrows">Saving Throws</a>
           <a href="#combatinfo">Combat Info</a>
           <a href="#armorclass">Armor Class</a>
@@ -28,6 +30,7 @@ export const InfoPage = () => {
       </section>
       <InfoBar />
       <Attributes />
+      <Effects />
       <SavingThrows />
       <CombatInfo />
       <ArmorClass />

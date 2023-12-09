@@ -1,6 +1,8 @@
 import { useAtomValue } from "jotai"
 import { characterSheetAtom } from "../atoms"
-import { calculateEncumbrance, deCamel, encumbranceValueToState } from "../utils"
+import { deCamel } from "../utils/utils"
+import { encumbranceValueToState } from "../utils/encumbrance.utils"
+import { calculateEncumbrance } from "../utils/encumbrance.utils"
 import { Typography } from "@mui/material"
 
 export function Encumbrance() {
@@ -13,17 +15,17 @@ export function Encumbrance() {
     <section id="encumbrance" className="ch-box">
       <Typography variant='h2'>Encumbrance</Typography>
       <div className="grid grid-cols-2 gap-x-4">
-        <span className="justify-self-end">State</span>
+        <span className="">State</span>
         <span className="capitalize">{deCamel(state)}</span>
-        <span className="justify-self-end">Points</span>
+        <span className="">Points</span>
         <span>{value}</span>
-        <span className="justify-self-end">Explore</span>
+        <span className="">Explore</span>
         <span>{description.explore}</span>
-        <span className="justify-self-end">Combat</span>
+        <span className="">Combat</span>
         <span>{description.combat}</span>
-        <span className="justify-self-end">Running</span>
+        <span className="">Running</span>
         <span>{description.running}</span>
-        <span className="justify-self-end">Per Day</span>
+        <span className="">Per Day</span>
         <span>{description.perDay}</span>
       </div>
     </section>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .ch-box {
-  @apply m-2.5 border max-w-lg p-4;
+  @apply border max-w-lg p-4;
 }
 
 .active {
