@@ -1,7 +1,6 @@
 import localForage from 'localforage'
 import { CharacterSheet, CharacterSheetSchema } from '../types'
 import { z } from 'zod'
-import { mockData } from '../mockdata'
 
 export async function getCharacterSheets(): Promise<CharacterSheet[]> {
   try {
@@ -11,7 +10,7 @@ export async function getCharacterSheets(): Promise<CharacterSheet[]> {
     if (data) {
       characterSheets = z.array(CharacterSheetSchema).parse(data)
     } else {
-      characterSheets = mockData.characterSheets
+      characterSheets = (await import('../mockdata')).mockData.characterSheets
       await localForage.setItem('characterSheets', characterSheets)
     }
 

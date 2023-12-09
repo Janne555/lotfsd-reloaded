@@ -113,51 +113,6 @@ const characterSheets = Array.from({ length: 10 }, (_, i): CharacterSheet => ({
       id: Math.random().toString(),
       name: 'Crowbar',
       oversized: false,
-    },
-    {
-      id: Math.random().toString(),
-      name: 'Hammer',
-      oversized: false,
-    },
-    {
-      id: Math.random().toString(),
-      name: 'Spikes',
-      oversized: false,
-    },
-    {
-      id: Math.random().toString(),
-      name: 'Shovel',
-      oversized: false,
-    },
-    {
-      id: Math.random().toString(),
-      name: 'Pole',
-      oversized: false,
-    },
-    {
-      id: Math.random().toString(),
-      name: 'Mirror',
-      oversized: false,
-    },
-    {
-      id: Math.random().toString(),
-      name: 'Chalk',
-      oversized: false,
-    },
-    {
-      id: Math.random().toString(),
-      name: 'Paper',
-      oversized: false,
-    },
-    {
-      id: Math.random().toString(),
-      name: 'Ink',
-      oversized: false,
-    },
-    {
-      id: Math.random().toString(),
-      name: 'Quill',
-      oversized: false
     }
   ],
 }))
