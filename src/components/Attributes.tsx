@@ -1,35 +1,39 @@
 import { Typography } from '@mui/material'
 import { Attributes as AttributesType } from '../types'
-import { characterSheetAtom, editModeAtom } from '../atoms'
+import { editModeAtom } from '../atoms'
 import { useAtomValue } from 'jotai'
+import { useChangeHandler, useCharacterSheet } from '../hooks'
+import { calculateAttributeModifier, calculateAttributeValue } from '../utils'
 
 export function Attributes() {
-  const { attributes } = useAtomValue(characterSheetAtom)
+  const characterSheet = useCharacterSheet()
   const isEditMode = useAtomValue(editModeAtom)
+  const updateCharacterSheet = useChangeHandler()
 
-  const handleChange = (name: keyof AttributesType, key: keyof AttributesType[keyof AttributesType], value: number) => {
+  const handleChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.valueAsNumber
+    updateCharacterSheet(ch => {
+      ch.attributes[key as keyof AttributesType].value = value
+    })
   }
 
   return (
     <section id="attributes" className="ch-box">
       <Typography variant='h2'>Attributes</Typography>
       {
-        Object.entries(attributes).map(([name, { value, modifier }]) => (
-          <div key={name} className="grid grid-cols-12 items-center">
+        Object.entries(characterSheet.attributes).map(([name, { value }]) => (
+          <div key={name} className="grid grid-cols-12 items-center gap-x-4">
             <span className="col-span-4 capitalize place-self-center">{name}</span>
             <div className="row-start-2 col-span-4 place-self-center border w-14 h-14 flex items-center justify-center">
               {isEditMode
-                ? <input type="number" value={value ?? ""} onChange={e => handleChange(name as any, "value", e.target.valueAsNumber)} className="w-full m-2" />
-                : <span>{value}</span>
+                ? <input type="number" defaultValue={value ?? ""} onChange={handleChange(name)} className="w-full m-2 text-center" />
+                : <span>{calculateAttributeValue(name as any, characterSheet)}</span>
               }
             </div>
-            <div className="row-start-2 col-span-2 border rounded-full w-12 h-12 flex items-center justify-center">
-              {isEditMode
-                ? <input type="number" value={modifier ?? ""} onChange={e => handleChange(name as any, "modifier", e.target.valueAsNumber)} className="w-full m-2" />
-                : <span>{modifier}</span>
-              }
+            <div className="row-start-2 col-span-3 border rounded-full w-12 h-12 flex items-center justify-center">
+              <span>{calculateAttributeModifier(name as any, characterSheet)}</span>
             </div>
-            <span className="row-start-2 col-span-6">{descriptions[name]}</span>
+            <span className="row-start-2 col-span-5">{descriptions[name]}</span>
           </div>
         ))
       }

@@ -40,5 +40,5 @@ export function useCharacterSheet() {
   const [characterSheet] = useAtom(characterSheetAtom)
   const [tempCharacterSheet] = useAtom(tempCharacterSheetReadWriteAtom)
 
-  return isEditMode ? tempCharacterSheet : characterSheet
+  return isEditMode && tempCharacterSheet ? tempCharacterSheet : characterSheet
 }

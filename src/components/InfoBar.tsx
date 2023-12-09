@@ -1,13 +1,13 @@
 import { useAtomValue } from "jotai"
 import React from "react"
-import { characterSheetAtom, editModeAtom } from "../atoms"
+import { editModeAtom } from "../atoms"
 import { deCamel } from "../utils"
 import { Typography } from "@mui/material"
-import { useChangeHandler } from "../hooks"
+import { useChangeHandler, useCharacterSheet } from "../hooks"
 import { Info } from "../types"
 
 export function InfoBar() {
-  const { info } = useAtomValue(characterSheetAtom)
+  const { info } = useCharacterSheet()
   const isEditMode = useAtomValue(editModeAtom)
   const updateCharacterSheet = useChangeHandler()
 

@@ -1,19 +1,19 @@
 import { z } from "zod"
 
 const AttributeSchema = z.object({
-  value: z.number().min(0).max(20)
+  value: z.number()
 })
 
 const SavingThrowSchema = z.object({
-  value: z.number().min(0).max(20),
+  value: z.number()
 })
 
 const AttackBonusSchema = z.object({
-  value: z.number().min(-20).max(20),
+  value: z.number()
 })
 
 const HitPointsSchema = z.object({
-  value: z.number().min(0).max(500),
+  value: z.number()
 })
 
 const SurpriseChanceSchema = z.object({
@@ -21,7 +21,7 @@ const SurpriseChanceSchema = z.object({
 })
 
 const ArmorClassSchema = z.object({
-  value: z.number().min(0).max(100),
+  value: z.number()
 })
 
 const ActivitySchema = z.object({
@@ -47,7 +47,7 @@ const ItemSchema = z.object({
 
 const WeaponSchema = z.object({
   name: z.string(),
-  attackBonus: z.number().min(-100).max(100),
+  attackBonus: z.number(),
   damage: z.string(),
   oversized: z.boolean(),
   id: z.string(),
@@ -120,10 +120,13 @@ const ActivitiesSchema = z.record(ActivitySchema)
 
 const EffectSchema = z.object({
   effect: z.enum(["add", "replace", "unknown"]),
-  targetCategory: z.enum(["attributes", "savingThrows", "combatInfo", "armorClasses", "encumbrance"]),
+  targetCategory: z.enum(["attributes", "attributeModifier", "savingThrows", "combatInfo", "armorClasses", "encumbrance"]),
   targetSubCategory: z.string(),
   valueNum: z.number().optional(),
-  valueStr: z.string().optional()
+  valueStr: z.string().optional(),
+  id: z.string(),
+  name: z.string(),
+  active: z.boolean().optional(),
 })
 
 const SpellSlotSchema = z.object({
@@ -149,6 +152,7 @@ const CharacterSheetSchema = z.object({
   spells: z.array(SpellSchema),
   spellSlots: z.array(SpellSlotSchema),
   combatOptions: z.array(CombatOptionSchema),
+  effects: z.array(EffectSchema)
 })
 
 export {
@@ -172,6 +176,8 @@ export {
   ArmorClassesSchema,
   ActivitiesSchema,
   CharacterSheetSchema,
+  EffectSchema,
+  SpellSlotSchema,
 }
 
 export type Attribute = z.infer<typeof AttributeSchema>
@@ -194,3 +200,5 @@ export type CombatInfo = z.infer<typeof CombatInfoSchema>
 export type ArmorClasses = z.infer<typeof ArmorClassesSchema>
 export type Activities = z.infer<typeof ActivitiesSchema>
 export type CharacterSheet = z.infer<typeof CharacterSheetSchema>
+export type Effect = z.infer<typeof EffectSchema>
+export type SpellSlot = z.infer<typeof SpellSlotSchema>

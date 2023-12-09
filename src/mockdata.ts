@@ -115,6 +115,71 @@ const characterSheets = Array.from({ length: 10 }, (_, i): CharacterSheet => ({
       oversized: false,
     }
   ],
+  info: {
+    age: 20,
+    alignment: 'Neutral',
+    class: 'Fighter',
+    currentXp: 0,
+    xpForNextLevel: 1000,
+    gender: 'Male',
+    name: 'John Doe',
+    race: 'Human'
+  },
+  attributes: {
+    strength: {
+      value: 10
+    },
+    dexterity: {
+      value: 10
+    },
+    constitution: {
+      value: 10
+    },
+    intelligence: {
+      value: 10
+    },
+    wisdom: {
+      value: 10
+    },
+    charisma: {
+      value: 10
+    },
+  },
+  effects: [
+    {
+      effect: 'add',
+      targetCategory: 'attributes',
+      targetSubCategory: 'strength',
+      valueNum: 1,
+      id: Math.random().toString(),
+      name: 'Strength +1',
+    },
+    {
+      effect: 'add',
+      targetCategory: 'attributeModifier',
+      targetSubCategory: 'intelligence',
+      valueNum: 1,
+      id: Math.random().toString(),
+      name: 'Int +1',
+    }
+  ],
+  savingThrows: {
+    paralyze: {
+      value: 10
+    },
+    poison: {
+      value: 10
+    },
+    breathWeapon: {
+      value: 10
+    },
+    magicalDevice: {
+      value: 10
+    },
+    magic: {
+      value: 10
+    },
+  },
 }))
 
 export const mockData = {
