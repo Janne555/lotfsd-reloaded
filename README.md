@@ -23,3 +23,5 @@
 - magic items
   - have effects
   - have cooldowns
+- notifications
+  - undo action

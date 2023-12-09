@@ -54,3 +54,7 @@ export function useCharacterSheet() {
 
   return isEditMode && tempCharacterSheet ? tempCharacterSheet : characterSheet
 }
+
+export function useEffects() {
+  return useCharacterSheet().effects
+}

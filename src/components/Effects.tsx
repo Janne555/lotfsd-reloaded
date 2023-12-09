@@ -1,18 +1,9 @@
 import { List, ListItem, ListItemText, Switch, Typography } from '@mui/material'
-import { useMutateTempCharSheet, useCharacterSheet, useEditMode } from '../hooks'
+import { useEffects, useMutateCharSheet } from '../hooks'
 
 export function Effects() {
-  const { effects } = useCharacterSheet()
-  const handleChange = useMutateTempCharSheet()
-  const { isEditMode } = useEditMode()
-
-  const handleDeleteEffect = (id: string) => {
-    handleChange((draft) => {
-      const index = draft.effects.findIndex((effect) => effect.id === id)
-      if (index === -1) return
-      delete draft.effects[index]
-    })
-  }
+  const effects = useEffects()
+  const handleChange = useMutateCharSheet()
 
   return (
     <section id="effects" className="ch-box">
@@ -23,7 +14,6 @@ export function Effects() {
           <ListItem key={index}>
             <ListItemText primary={effect.name} />
             <Switch
-              disabled={!isEditMode}
               edge="end"
               onChange={(e) => {
                 handleChange((draft) => {
