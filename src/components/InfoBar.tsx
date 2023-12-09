@@ -3,13 +3,20 @@ import React from "react"
 import { characterSheetAtom, editModeAtom } from "../atoms"
 import { deCamel } from "../utils"
 import { Typography } from "@mui/material"
+import { useChangeHandler } from "../hooks"
+import { Info } from "../types"
 
 export function InfoBar() {
   const { info } = useAtomValue(characterSheetAtom)
   const isEditMode = useAtomValue(editModeAtom)
+  const updateCharacterSheet = useChangeHandler()
 
-  const handleChange = (key: keyof typeof info, value: string) => {
-    console.log(key, value)
+  const handleChange = (k: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const key = k as keyof Info
+    const value = typeMap[key] === 'number' ? e.target.valueAsNumber : e.target.value
+    updateCharacterSheet(ch => {
+      ch.info[key] = value as never
+    })
   }
 
   return (
@@ -21,7 +28,7 @@ export function InfoBar() {
             <React.Fragment key={key}>
               <span className="capitalize  items-start">{deCamel(key)}</span>
               {isEditMode
-                ? <input value={value ?? ""} onChange={e => handleChange(key as any, e.target.value)} className="" />
+                ? <input defaultValue={value ?? ""} type={typeMap[key]} onChange={handleChange(key)} className="" />
                 : <span>{value}</span>
               }
             </React.Fragment>
@@ -30,4 +37,15 @@ export function InfoBar() {
       </div>
     </section>
   )
+}
+
+const typeMap: Record<string, string> = {
+  name: 'text',
+  currentXp: 'number',
+  xpForNextLevel: 'number',
+  class: 'text',
+  race: 'text',
+  age: 'number',
+  gender: 'text',
+  alignment: 'text',
 }

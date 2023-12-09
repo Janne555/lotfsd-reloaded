@@ -1,8 +1,7 @@
 import { z } from "zod"
 
 const AttributeSchema = z.object({
-  value: z.number().min(0).max(20),
-  modifier: z.number().min(-5).max(5),
+  value: z.number().min(0).max(20)
 })
 
 const SavingThrowSchema = z.object({
@@ -79,7 +78,7 @@ const InfoSchema = z.object({
   xpForNextLevel: z.number(),
   class: z.string(),
   race: z.string(),
-  age: z.string(),
+  age: z.number(),
   gender: z.string(),
   alignment: z.string()
 })
@@ -119,6 +118,20 @@ const ArmorClassesSchema = z.object({
 
 const ActivitiesSchema = z.record(ActivitySchema)
 
+const EffectSchema = z.object({
+  effect: z.enum(["add", "replace", "unknown"]),
+  targetCategory: z.enum(["attributes", "savingThrows", "combatInfo", "armorClasses", "encumbrance"]),
+  targetSubCategory: z.string(),
+  valueNum: z.number().optional(),
+  valueStr: z.string().optional()
+})
+
+const SpellSlotSchema = z.object({
+  level: z.number(),
+  count: z.number(),
+  usedCount: z.number()
+})
+
 const CharacterSheetSchema = z.object({
   id: z.string(),
   version: z.number(),
@@ -134,6 +147,7 @@ const CharacterSheetSchema = z.object({
   nonEncumberingEquipment: z.array(ItemSchema),
   weapons: z.array(WeaponSchema),
   spells: z.array(SpellSchema),
+  spellSlots: z.array(SpellSlotSchema),
   combatOptions: z.array(CombatOptionSchema),
 })
 

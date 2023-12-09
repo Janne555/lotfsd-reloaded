@@ -9,6 +9,7 @@ import { Page } from './components/Layouts'
 import { Navigation } from './components/Navigation'
 import { InventoryPage } from './pages/Inventory.page'
 import { SpellsPage } from './pages/Spells.page'
+import { FloatingSaveButton } from './components/FloatingSaveButton'
 
 const theme = createTheme({
   typography: {
@@ -46,6 +47,7 @@ function App() {
                     <Route path="/inventory" element={<InventoryPage />} />
                     <Route path="/spells" element={<SpellsPage />} />
                   </Routes>
+                  <FloatingSaveButton />
                 </Page>
               } />
             </Routes>
