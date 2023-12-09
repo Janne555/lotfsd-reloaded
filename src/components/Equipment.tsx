@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai"
-import { chunk } from "../utils"
+import { chunk } from "../utils/utils"
 import { characterSheetAtom } from "../atoms"
 import { Typography } from "@mui/material"
 

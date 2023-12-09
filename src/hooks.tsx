@@ -4,8 +4,9 @@ import { produce } from "immer"
 import { CharacterSheet } from "./types"
 import { saveCharacterSheet } from "./pages/storage"
 
-export function useChangeHandler() {
+export function useMutateTempCharSheet() {
   const [tempCharacterSheet, setTempCharacterSheet] = useAtom(tempCharacterSheetReadWriteAtom)
+  
 
   return (fn: (draft: CharacterSheet) => void) => {
     const newSheet = produce(tempCharacterSheet, fn)
@@ -13,11 +14,22 @@ export function useChangeHandler() {
   }
 }
 
+export function useMutateCharSheet() {
+  const [_, refresh] = useAtom(characterSheetsAtom)  
+  const characterSheet = useAtomValue(characterSheetAtom)
+
+  return async (fn: (draft: CharacterSheet) => void) => {
+    const newSheet = produce(characterSheet, fn)
+    await saveCharacterSheet(newSheet)
+    refresh()
+  }
+}
+
 export function useEditMode() {
   const [isEditMode, setEditMode] = useAtom(editModeAtom)
   const characterSheet = useAtomValue(characterSheetAtom)
   const [tempCharacterSheet, setTempCharacterSheet] = useAtom(tempCharacterSheetReadWriteAtom)
-  const [__, refresh] = useAtom(characterSheetsAtom)
+  const [_, refresh] = useAtom(characterSheetsAtom)
 
   return {
     isEditMode,

@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai"
 import { characterSheetAtom } from "../atoms"
-import { partition } from "../utils"
+import { partition } from "../utils/utils"
 import { Typography } from "@mui/material"
 
 export function Languages() {

@@ -1,6 +1,8 @@
 import { useAtomValue } from "jotai"
 import { characterSheetAtom } from "../atoms"
-import { calculateEncumbrance, deCamel, encumbranceValueToState } from "../utils"
+import { deCamel } from "../utils/utils"
+import { encumbranceValueToState } from "../utils/encumbrance.utils"
+import { calculateEncumbrance } from "../utils/encumbrance.utils"
 import { Typography } from "@mui/material"
 
 export function Encumbrance() {

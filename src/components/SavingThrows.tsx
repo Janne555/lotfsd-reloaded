@@ -1,7 +1,7 @@
 import { Diamond } from './Diamond'
 import { characterSheetAtom, editModeAtom } from '../atoms'
 import { useAtomValue } from 'jotai'
-import { deCamel } from '../utils'
+import { deCamel } from '../utils/utils'
 import { Typography } from '@mui/material'
 
 

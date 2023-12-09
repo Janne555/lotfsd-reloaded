@@ -1,9 +1,9 @@
-import { List, ListItem, ListItemButton, ListItemText, Switch, Typography } from '@mui/material'
-import { useChangeHandler, useCharacterSheet, useEditMode } from '../hooks'
+import { List, ListItem, ListItemText, Switch, Typography } from '@mui/material'
+import { useMutateTempCharSheet, useCharacterSheet, useEditMode } from '../hooks'
 
 export function Effects() {
   const { effects } = useCharacterSheet()
-  const handleChange = useChangeHandler()
+  const handleChange = useMutateTempCharSheet()
   const { isEditMode } = useEditMode()
 
   const handleDeleteEffect = (id: string) => {
@@ -36,5 +36,5 @@ export function Effects() {
         ))}
       </List>
     </section>
-  );
+  )
 }

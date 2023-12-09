@@ -180,6 +180,108 @@ const characterSheets = Array.from({ length: 10 }, (_, i): CharacterSheet => ({
       value: 10
     },
   },
+  combatInfo: {
+    baseAB: {
+      value: 10
+    },
+    meleeAB: {
+      value: 10
+    },
+    rangedAB: {
+      value: 10
+    },
+    maxHP: {
+      value: 10
+    },
+    currentHP: {
+      value: 10
+    },
+    surpriseChance: {
+      value: 6
+    },
+  },
+  armorClasses: {
+    melee: {
+      value: 10
+    },
+    ranged: {
+      value: 10
+    },
+    withoutShield: {
+      value: 10
+    },
+    surprised: {
+      value: 10
+    },
+  },
+  spells: [
+    {
+      name: 'Magic Missile',
+      level: 1,
+      description: 'A missile of magical energy darts forth from your fingertip and strikes its target, dealing 1d6+1 points of force damage.',
+      id: 'spell-1'
+    },
+    {
+      name: 'Fireball',
+      level: 3,
+      description: 'A fireball spell generates a searing explosion of flame that detonates with a low roar and deals 1d6 points of fire damage per caster level (maximum 10d6) to every creature within the area.',
+      id: 'spell-2'
+    },
+    {
+      name: 'Phantasamal Force',
+      level: 2,
+      description: 'You tap into the nightmares of a creature you can see within range and create an illusory manifestation of its deepest fears, visible only to that creature.',  
+      id: 'spell-3'
+    }
+  ],
+  spellSlots: [
+    {
+      level: 1,
+      preparedSpellId: 'spell-1',
+      id: 'spell-slot-1',
+      used: true
+    },
+    {
+      level: 1,
+      preparedSpellId: 'spell-1',
+      id: 'spell-slot-2',
+      used: false
+    },
+    {
+      level: 1,
+      id: 'spell-slot-3',
+      used: false
+    },
+    {
+      level: 2,
+      preparedSpellId: 'spell-3',
+      id: 'spell-slot-4',
+      used: false
+    },
+    {
+      level: 2,
+      preparedSpellId: 'spell-3',
+      id: 'spell-slot-5',
+      used: false
+    },
+    {
+      level: 3,
+      preparedSpellId: 'spell-2',
+      id: 'spell-slot-6',
+      used: false
+    },
+    {
+      level: 3,
+      preparedSpellId: 'spell-2',
+      id: 'spell-slot-7',
+      used: false
+    },
+    {
+      level: 3,
+      id: 'spell-slot-8',
+      used: false
+    },
+  ]
 }))
 
 export const mockData = {

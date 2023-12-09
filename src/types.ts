@@ -63,9 +63,15 @@ const WeaponSchema = z.object({
 const SpellSchema = z.object({
   name: z.string(),
   description: z.string(),
-  prepared: z.boolean(),
   level: z.number(),
   id: z.string(),
+})
+
+const SpellSlotSchema = z.object({
+  level: z.number(),
+  preparedSpellId: z.string().optional(),
+  id: z.string(),
+  used: z.boolean()
 })
 
 const CombatOptionSchema = z.object({
@@ -127,12 +133,6 @@ const EffectSchema = z.object({
   id: z.string(),
   name: z.string(),
   active: z.boolean().optional(),
-})
-
-const SpellSlotSchema = z.object({
-  level: z.number(),
-  count: z.number(),
-  usedCount: z.number()
 })
 
 const CharacterSheetSchema = z.object({

@@ -2,13 +2,14 @@ import { Typography } from '@mui/material'
 import { Attributes as AttributesType } from '../types'
 import { editModeAtom } from '../atoms'
 import { useAtomValue } from 'jotai'
-import { useChangeHandler, useCharacterSheet } from '../hooks'
-import { calculateAttributeModifier, calculateAttributeValue } from '../utils'
+import { useMutateTempCharSheet, useCharacterSheet } from '../hooks'
+import { calculateAttributeModifier } from "../utils/attributes.utils"
+import { calculateAttributeValue } from "../utils/attributes.utils"
 
 export function Attributes() {
   const characterSheet = useCharacterSheet()
   const isEditMode = useAtomValue(editModeAtom)
-  const updateCharacterSheet = useChangeHandler()
+  const updateCharacterSheet = useMutateTempCharSheet()
 
   const handleChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.valueAsNumber

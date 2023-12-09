@@ -1,12 +1,7 @@
-import { calculateAttributeModifier } from './utils'
+import { calculateAttributeModifier } from "./attributes.utils"
 import { describe, expect, test } from 'vitest'
-import { produce } from 'immer'
-import { CharacterSheet, CharacterSheetSchema } from './types'
-import { generateMock } from '@anatine/zod-mock'
-
-function makeCustomCharacterSheet(modifyFn: (characterSheet: CharacterSheet) => void) {
-  return produce(generateMock(CharacterSheetSchema), modifyFn)
-}
+import { CharacterSheet } from '../types'
+import { makeCustomCharacterSheet } from "./test.utils"
 
 describe('calculateAttributeModifier', () => {
   test.each([

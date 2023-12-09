@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import { deCamel } from '../utils'
+import { deCamel } from '../utils/utils'
 import { DieFace } from './DieFace'
 import { useAtomValue } from 'jotai'
 import { characterSheetAtom } from '../atoms'
