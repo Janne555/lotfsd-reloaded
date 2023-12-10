@@ -4,20 +4,48 @@ import { CharacterSheet, CharacterSheetSchema } from './types'
 const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
   ...generateMock(CharacterSheetSchema),
   id: i.toString(),
-  activities: {
-    sneackAttack: {
-      value: 1
+  activities: [
+    {
+      id: Math.random().toString(),
+      name: 'Climb',
+      value: Math.ceil(Math.random() * 6),
     },
-    bushcraft: {
-      value: 1
+    {
+      id: Math.random().toString(),
+      name: 'Stealth',
+      value: Math.ceil(Math.random() * 6),
     },
-    climb: {
-      value: 1
+    {
+      id: Math.random().toString(),
+      name: 'Bushcraft',
+      value: Math.ceil(Math.random() * 6),
     },
-    languages: {
-      value: 6
+    {
+      id: Math.random().toString(),
+      name: 'Languages',
+      value: Math.ceil(Math.random() * 6),
     },
-  },
+    {
+      id: Math.random().toString(),
+      name: 'Open Doors',
+      value: Math.ceil(Math.random() * 6),
+    },
+    {
+      id: Math.random().toString(),
+      name: 'Search',
+      value: Math.ceil(Math.random() * 6),
+    },
+    {
+      id: Math.random().toString(),
+      name: 'Sneac Attack',
+      value: Math.ceil(Math.random() * 6),
+    },
+    {
+      id: Math.random().toString(),
+      name: 'Architecture',
+      value: Math.ceil(Math.random() * 6),
+    }
+  ],
   weapons: [
     {
       name: 'Sword',
@@ -241,7 +269,7 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
     {
       name: 'Phantasamal Force',
       level: 2,
-      description: 'You tap into the nightmares of a creature you can see within range and create an illusory manifestation of its deepest fears, visible only to that creature.',  
+      description: 'You tap into the nightmares of a creature you can see within range and create an illusory manifestation of its deepest fears, visible only to that creature.',
       id: 'spell-3'
     }
   ],

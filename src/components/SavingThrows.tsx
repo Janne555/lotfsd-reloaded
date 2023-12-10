@@ -60,11 +60,7 @@ export function SavingThrows() {
               aria-label="close"
               onClick={() => setShowSnackbarFor(undefined)}
             >
-              <IconButton
-                onClick={() => setShowSnackbarFor(undefined)}
-              >
-                <Close htmlColor='white' />
-              </IconButton>
+              <Close htmlColor='white' />
             </IconButton>
           }
         />

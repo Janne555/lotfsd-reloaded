@@ -29,8 +29,6 @@ export const InfoPage = () => {
           <a href="#attributes">Effects</a>
           <a href="#savingthrows">Saving Throws</a>
           <a href="#combatinfo">Combat Info</a>
-          <a href="#armorclass">Armor Class</a>
-          <a href="#combatoptions">Combat Options</a>
           <a href="#activities">Common Activities</a>
           <a href="#encumbrance">Encumbrance</a>
           <a href="#languages">Languages</a>

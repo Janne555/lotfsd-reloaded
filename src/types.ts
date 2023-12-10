@@ -26,6 +26,8 @@ const ArmorClassSchema = z.object({
 
 const ActivitySchema = z.object({
   value: z.number().min(0).max(6),
+  id: z.string(),
+  name: z.string().min(3),
 })
 
 const EncumbranceSchema = z.object({
@@ -124,8 +126,6 @@ const ArmorClassesSchema = z.object({
   surprised: ArmorClassSchema,
 })
 
-const ActivitiesSchema = z.record(ActivitySchema)
-
 const EffectSchema = z.object({
   effect: z.enum(["add", "replace", "unknown"]),
   targetCategory: z.enum(["attributes", "attributeModifier", "savingThrows", "combatInfo", "armorClasses", "encumbrance"]),
@@ -144,7 +144,7 @@ const CharacterSheetSchema = z.object({
   savingThrows: SavingThrowsSchema,
   combatInfo: CombatInfoSchema,
   armorClasses: ArmorClassesSchema,
-  activities: ActivitiesSchema,
+  activities: z.array(ActivitySchema),
   encumbrance: EncumbranceSchema,
   languages: z.array(LanguageSchema),
   equipment: z.array(ItemSchema),
@@ -175,7 +175,6 @@ export {
   SavingThrowsSchema,
   CombatInfoSchema,
   ArmorClassesSchema,
-  ActivitiesSchema,
   CharacterSheetSchema,
   EffectSchema,
   SpellSlotSchema,
@@ -199,7 +198,6 @@ export type Attributes = z.infer<typeof AttributesSchema>
 export type SavingThrows = z.infer<typeof SavingThrowsSchema>
 export type CombatInfo = z.infer<typeof CombatInfoSchema>
 export type ArmorClasses = z.infer<typeof ArmorClassesSchema>
-export type Activities = z.infer<typeof ActivitiesSchema>
 export type CharacterSheet = z.infer<typeof CharacterSheetSchema>
 export type Effect = z.infer<typeof EffectSchema>
 export type SpellSlot = z.infer<typeof SpellSlotSchema>

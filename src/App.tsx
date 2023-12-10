@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Suspense } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import { StartPage } from './pages/Start.page'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -12,6 +12,8 @@ import { SpellsPage } from './pages/Spells.page'
 import { FloatingSaveButton } from './components/FloatingSaveButton'
 import { NotFoundPage } from './pages/NotFound.page'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { Fab } from '@mui/material'
+import { Navigation as NavigationIcon } from '@mui/icons-material'
 
 const theme = createTheme({
   typography: {
@@ -34,11 +36,29 @@ const theme = createTheme({
 })
 
 function App() {
+  const rootRef = useRef<HTMLDivElement>(null)
+  const [showScrollButton, setShowScrollButton] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setShowScrollButton(!entry.isIntersecting)
+    })
+    if (rootRef.current) {
+      observer.observe(rootRef.current)
+    }
+    return () => {
+      if (rootRef.current) {
+        observer.unobserve(rootRef.current)
+      }
+    }
+  }, [])
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <WithPathMatch>
           <Suspense fallback={<CircularProgress />}>
+            <div ref={rootRef} />
             <Routes>
               <Route path="/" element={<StartPage />} />
               <Route path="/character-sheet/new" element={<NotFoundPage />} />
@@ -57,6 +77,17 @@ function App() {
               } />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
+            {showScrollButton && (
+              <>
+                <div className="mt-24" />
+                <div className="fixed bottom-4 right-4">
+                  <Fab variant="extended" onClick={() => rootRef.current?.scrollIntoView()}>
+                    <NavigationIcon />
+                    Back to top
+                  </Fab>
+                </div>
+              </>
+            )}
           </Suspense>
         </WithPathMatch>
       </BrowserRouter>

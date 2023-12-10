@@ -1,22 +1,61 @@
-import { Box, Typography } from '@mui/material'
+import { Box, IconButton, Typography } from '@mui/material'
 import { deCamel } from '../utils/utils'
 import { DieFace } from './DieFace'
-import { useAtomValue } from 'jotai'
-import { characterSheetAtom } from '../atoms'
+import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from '../hooks'
+import { Add, Delete } from '@mui/icons-material'
+import { nanoid } from 'nanoid'
 
 export function Activities() {
-  const { activities } = useAtomValue(characterSheetAtom)
+  const { activities } = useCharacterSheet()
+  const mutateTempCharacterSheet = useMutateTempCharSheet()
+  const { isEditMode } = useEditMode()
+
+  const handleDelete = (id: string) => {
+    mutateTempCharacterSheet(draft => {
+      draft.activities = draft.activities.filter(act => act.id !== id)
+    })
+  }
+
+  const handleValueChange = (id: string, value: number) => {
+    mutateTempCharacterSheet(draft => {
+      const index = draft.activities.findIndex(act => act.id === id)
+      draft.activities[index].value = value
+    })
+  }
+
+  const handleNameChange = (id: string) => (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    mutateTempCharacterSheet(draft => {
+      const index = draft.activities.findIndex(act => act.id === id)
+      draft.activities[index].name = e.target.value
+    })
+  }
+
+  const handleAddActivity = () => {
+    mutateTempCharacterSheet(draft => {
+      draft.activities.push({ id: nanoid(), name: 'change name', value: 0 })
+    })
+  }
 
   return (
     <Box id="activities" className="ch-box">
       <Typography variant="h2">Common Activities</Typography>
-      <Box className="flex flex-wrap justify-center gap-4">
-        {Object.entries(activities).map(([name, { value }]) => (
-          <Box key={name} className="w-24 flex flex-col items-center justify-items-center">
-            <DieFace value={value} />
-            <Typography className="capitalize font-bold text-center">{deCamel(name)}</Typography>
+      <Box className="flex flex-wrap gap-4">
+        {activities.map(({ value, name, id }) => (
+          <Box key={id} className="w-24 flex flex-col items-center justify-items-center">
+            {isEditMode && <IconButton onClick={() => handleDelete(id)}><Delete /></IconButton>}
+            <DieFace value={value} name={name} isEditMode={isEditMode} onChange={(val) => handleValueChange(id, val)} />
+            {isEditMode
+              ? <textarea className="w-full text-center" defaultValue={name} onChange={handleNameChange(id)} />
+              : <Typography className="w-full capitalize font-bold text-center">{deCamel(name)}</Typography>
+            }
           </Box>
         ))}
+        {isEditMode && (
+          <Box className="w-24 h-24 place-self-center flex flex-col place-content-center items-center justify-items-center border">
+            <IconButton onClick={handleAddActivity}><Add /></IconButton>
+            <Typography className="font-bold text-center">Add Activity</Typography>
+          </Box>
+        )}
       </Box>
     </Box>
   )

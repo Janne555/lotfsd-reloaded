@@ -26,6 +26,7 @@ export function CombatInfo() {
     mutateTempCharSheet(draft => {
       draft.armorClasses[key].value = value
     })
+    console.log(key, value)
   }
 
   const handleDeleteCombatOption = (id: string) => () => {
@@ -122,13 +123,18 @@ export function CombatInfo() {
         <Card variant='elevation' className='h-30'>
           <CardContent className='grid grid-rows-2 justify-center text-center h-full'>
             <div className='self-center justify-self-center'>
-              <DieFace value={6} />
+              <DieFace
+                value={combatInfo.surpriseChance.value}
+                isEditMode={isEditMode}
+                onChange={(val) => handleCombatInfoChange('surpriseChance', val)}
+                name="surpriseChance"
+              />
             </div>
             <Typography className='capitalize place-self-end'>Surprise Chance</Typography>
           </CardContent>
         </Card>
         {combatOptions.map(({ name, id }) => (
-          <Card variant='elevation' className='flex flex-col'>
+          <Card key={id} variant='elevation' className='flex flex-col'>
             <CardContent>
               <div className="">Combat Option</div>
             </CardContent>

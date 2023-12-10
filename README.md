@@ -32,3 +32,5 @@
   - add / substract hp
 - retainers
 - qr code share
+- gaining spells from items
+- add language
