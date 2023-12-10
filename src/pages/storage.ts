@@ -22,6 +22,15 @@ export async function getCharacterSheets(): Promise<CharacterSheet[]> {
   }
 }
 
+export async function getCharacterSheet(id: string): Promise<CharacterSheet | undefined> {
+  try {
+    const characterSheets = await getCharacterSheets()
+    return characterSheets.find((sheet) => sheet.id === id)
+  } catch (error) {
+    console.error('Error retrieving character sheet:', error)
+  }
+}
+
 export async function saveCharacterSheet(characterSheet: CharacterSheet) {
   try {
     const characterSheets = await getCharacterSheets()

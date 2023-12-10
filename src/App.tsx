@@ -10,6 +10,8 @@ import { Navigation } from './components/Navigation'
 import { InventoryPage } from './pages/Inventory.page'
 import { SpellsPage } from './pages/Spells.page'
 import { FloatingSaveButton } from './components/FloatingSaveButton'
+import { NotFoundPage } from './pages/NotFound.page'
+import { ErrorBoundary } from './components/ErrorBoundary'
 
 const theme = createTheme({
   typography: {
@@ -39,17 +41,21 @@ function App() {
           <Suspense fallback={<CircularProgress />}>
             <Routes>
               <Route path="/" element={<StartPage />} />
+              <Route path="/character-sheet/new" element={<NotFoundPage />} />
               <Route path="/character-sheet/:id/*" element={
-                <Page>
-                  <Navigation />
-                  <Routes>
-                    <Route path="/info/*" element={<InfoPage />} />
-                    <Route path="/inventory/*" element={<InventoryPage />} />
-                    <Route path="/spells/*" element={<SpellsPage />} />
-                  </Routes>
-                  <FloatingSaveButton />
-                </Page>
+                <ErrorBoundary>
+                  <Page>
+                    <Navigation />
+                    <Routes>
+                      <Route path="/info/*" element={<InfoPage />} />
+                      <Route path="/inventory/*" element={<InventoryPage />} />
+                      <Route path="/spells/*" element={<SpellsPage />} />
+                    </Routes>
+                    <FloatingSaveButton />
+                  </Page>
+                </ErrorBoundary>
               } />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </WithPathMatch>

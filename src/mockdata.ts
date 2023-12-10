@@ -1,7 +1,7 @@
 import { generateMock } from '@anatine/zod-mock'
 import { CharacterSheet, CharacterSheetSchema } from './types'
 
-const characterSheets = Array.from({ length: 10 }, (_, i): CharacterSheet => ({
+const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
   ...generateMock(CharacterSheetSchema),
   id: i.toString(),
   activities: {

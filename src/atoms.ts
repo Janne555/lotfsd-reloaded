@@ -1,5 +1,5 @@
 import { Getter, atom, useSetAtom } from "jotai"
-import { getCharacterSheets } from "./pages/storage"
+import { getCharacterSheet, getCharacterSheets } from "./pages/storage"
 import { matchPath, useLocation } from 'react-router-dom'
 import { useEffect } from "react"
 import { CharacterSheet } from "./types"
@@ -39,9 +39,8 @@ export const characterIdAtom = pathMatchAtom('/character-sheet/:id/*')
 
 export const characterSheetAtom = atom(async (get) => {
   const characterId = get(characterIdAtom)
-  const characterSheets = await get(characterSheetsAtom)
-  const sheet = characterSheets.find((sheet) => sheet.id === characterId?.params.id)
-  if (!sheet) throw Promise.resolve("Pending")
+  const sheet = await getCharacterSheet(characterId?.params.id ?? '')
+  if (!sheet) throw Error("Character sheet not found")
   return sheet
 })
 
