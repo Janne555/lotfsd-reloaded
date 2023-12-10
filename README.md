@@ -15,6 +15,7 @@
   - effects from items
   - encumbrance
   - spell slots
+  - attack bonus
 - item sharing via urls
 - rest button
 - class features
@@ -25,3 +26,9 @@
   - have cooldowns
 - notifications
   - undo action
+- quick actions
+  - rest
+  - add xp
+  - add / substract hp
+- retainers
+- qr code share

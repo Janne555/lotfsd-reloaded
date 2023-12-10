@@ -37,9 +37,8 @@ export const characterSheetsAtom = atomWithRefresh(() => getCharacterSheets())
 
 export const characterIdAtom = pathMatchAtom('/character-sheet/:id/*')
 
-export const characterSheetAtom = atom(async (get) => {
+export const characterSheetAtom = atomWithRefresh(async (get) => {
   const characterId = get(characterIdAtom)
-  get(characterSheetsAtom)
   const sheet = await getCharacterSheet(characterId?.params.id ?? '')
   if (!sheet) throw Error("Character sheet not found")
   return sheet

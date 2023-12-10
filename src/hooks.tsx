@@ -1,12 +1,12 @@
 import { useAtom, useAtomValue } from "jotai"
-import { characterSheetAtom, characterSheetsAtom, editModeAtom, tempCharacterSheetReadWriteAtom } from "./atoms"
+import { characterSheetAtom, editModeAtom, tempCharacterSheetReadWriteAtom } from "./atoms"
 import { produce } from "immer"
 import { CharacterSheet } from "./types"
 import { saveCharacterSheet } from "./pages/storage"
 
 export function useMutateTempCharSheet() {
   const [tempCharacterSheet, setTempCharacterSheet] = useAtom(tempCharacterSheetReadWriteAtom)
-  
+
 
   return (fn: (draft: CharacterSheet) => void) => {
     const newSheet = produce(tempCharacterSheet, fn)
@@ -15,7 +15,7 @@ export function useMutateTempCharSheet() {
 }
 
 export function useMutateCharSheet() {
-  const [_, refresh] = useAtom(characterSheetsAtom)  
+  const [_, refresh] = useAtom(characterSheetAtom)
   const characterSheet = useAtomValue(characterSheetAtom)
 
   return async (fn: (draft: CharacterSheet) => void) => {
@@ -29,7 +29,7 @@ export function useEditMode() {
   const [isEditMode, setEditMode] = useAtom(editModeAtom)
   const characterSheet = useAtomValue(characterSheetAtom)
   const [tempCharacterSheet, setTempCharacterSheet] = useAtom(tempCharacterSheetReadWriteAtom)
-  const [_, refresh] = useAtom(characterSheetsAtom)
+  const [_, refresh] = useAtom(characterSheetAtom)
 
   return {
     isEditMode,
