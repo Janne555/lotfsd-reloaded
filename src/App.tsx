@@ -43,9 +43,9 @@ function App() {
                 <Page>
                   <Navigation />
                   <Routes>
-                    <Route path="/info" element={<InfoPage />} />
-                    <Route path="/inventory" element={<InventoryPage />} />
-                    <Route path="/spells" element={<SpellsPage />} />
+                    <Route path="/info/*" element={<InfoPage />} />
+                    <Route path="/inventory/*" element={<InventoryPage />} />
+                    <Route path="/spells/*" element={<SpellsPage />} />
                   </Routes>
                   <FloatingSaveButton />
                 </Page>

@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material"
+import { Box, Modal, Typography } from "@mui/material"
 import { Activities } from "../components/Activities"
 import { ArmorClass } from "../components/ArmorClass"
 import { Attributes } from "../components/Attributes"
@@ -9,8 +9,17 @@ import { InfoBar } from "../components/InfoBar"
 import { Languages } from "../components/Languages"
 import { SavingThrows } from "../components/SavingThrows"
 import { Effects } from "../components/Effects"
+import { Route, Routes, useNavigate } from "react-router-dom"
+import { characterIdAtom } from "../atoms"
+import { useAtomValue } from "jotai"
+import { EffectForm } from "../forms/Effect.form"
 
 export const InfoPage = () => {
+  const characterId = useAtomValue(characterIdAtom)
+  const navigate = useNavigate()
+
+  const handleClose = () => navigate(`/character-sheet/${characterId?.params.id}/info`)
+
   return (
     <div className="flex flex-col gap-y-4">
       <section className="ch-box">
@@ -38,6 +47,18 @@ export const InfoPage = () => {
       <Activities />
       <Encumbrance />
       <Languages />
+      <Routes>
+        <Route path="/add-effect" element={
+          <Modal
+            open
+            onClose={handleClose}
+          >
+            <Box>
+              <EffectForm onClose={handleClose} />
+            </Box>
+          </Modal>
+        } />
+      </Routes>
     </div>
   )
 }

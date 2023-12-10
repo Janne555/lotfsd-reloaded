@@ -128,10 +128,9 @@ const EffectSchema = z.object({
   effect: z.enum(["add", "replace", "unknown"]),
   targetCategory: z.enum(["attributes", "attributeModifier", "savingThrows", "combatInfo", "armorClasses", "encumbrance"]),
   targetSubCategory: z.string(),
-  valueNum: z.number().optional(),
-  valueStr: z.string().optional(),
+  value: z.string(),
   id: z.string(),
-  name: z.string(),
+  name: z.string().min(3),
   active: z.boolean().optional(),
 })
 

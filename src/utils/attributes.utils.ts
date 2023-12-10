@@ -1,29 +1,31 @@
 import { Attributes, CharacterSheet } from "../types"
 
 export function calculateAttributeValue(name: keyof Attributes, characterSheet: CharacterSheet) {
-  const attributeValue = characterSheet.attributes[name];
+  const attributeValue = characterSheet.attributes[name]
   const valueEffects = characterSheet.effects.filter(effect => effect.targetCategory === "attributes"
     && effect.targetSubCategory === name
     && effect.active
-  );
+  )
   if (valueEffects.find(effect => effect.effect === "replace")) {
-    return valueEffects.find(effect => effect.effect === "replace")?.valueNum ?? 0;
+    return Number(valueEffects.find(effect => effect.effect === "replace")?.value ?? 0)
   }
 
   return valueEffects.reduce((total, effect) => {
     if (effect.effect === "add") {
-      return total + (effect.valueNum ?? 0);
+      return total + Number((effect.value ?? 0))
     }
-    return total;
-  }, attributeValue.value);
-} export function calculateAttributeModifier(name: keyof Attributes, characterSheet: CharacterSheet) {
+    return total
+  }, attributeValue.value)
+}
+
+export function calculateAttributeModifier(name: keyof Attributes, characterSheet: CharacterSheet) {
   const modifierEffects = characterSheet.effects.filter(effect => effect.targetCategory === "attributeModifier"
     && effect.targetSubCategory === name
     && effect.active
   )
 
   if (modifierEffects.find(effect => effect.effect === "replace")) {
-    return modifierEffects.find(effect => effect.effect === "replace")?.valueNum ?? 0
+    return Number(modifierEffects.find(effect => effect.effect === "replace")?.value ?? 0)
   }
 
   const attributeValue = calculateAttributeValue(name, characterSheet)
@@ -48,7 +50,7 @@ export function calculateAttributeValue(name: keyof Attributes, characterSheet: 
 
   modifierEffects.forEach(effect => {
     if (effect.effect === "add") {
-      modifier += (effect.valueNum ?? 0)
+      modifier += Number((effect.value ?? 0))
     }
   })
 

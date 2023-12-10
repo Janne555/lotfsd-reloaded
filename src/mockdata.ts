@@ -150,7 +150,7 @@ const characterSheets = Array.from({ length: 10 }, (_, i): CharacterSheet => ({
       effect: 'add',
       targetCategory: 'attributes',
       targetSubCategory: 'strength',
-      valueNum: 1,
+      value: "1",
       id: Math.random().toString(),
       name: 'Strength +1',
     },
@@ -158,9 +158,17 @@ const characterSheets = Array.from({ length: 10 }, (_, i): CharacterSheet => ({
       effect: 'add',
       targetCategory: 'attributeModifier',
       targetSubCategory: 'intelligence',
-      valueNum: 1,
+      value: "1",
       id: Math.random().toString(),
       name: 'Int +1',
+    },
+    {
+      effect: 'add',
+      targetCategory: 'savingThrows',
+      targetSubCategory: 'paralyze',
+      value: "1",
+      id: Math.random().toString(),
+      name: 'Paralyze +1',
     }
   ],
   savingThrows: {

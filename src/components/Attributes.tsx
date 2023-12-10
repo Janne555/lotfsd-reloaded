@@ -10,7 +10,7 @@ export function Attributes() {
   const characterSheet = useCharacterSheet()
   const isEditMode = useAtomValue(editModeAtom)
   const updateCharacterSheet = useMutateTempCharSheet()
-
+3
   const handleChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.valueAsNumber
     updateCharacterSheet(ch => {
@@ -24,8 +24,8 @@ export function Attributes() {
       {
         Object.entries(characterSheet.attributes).map(([name, { value }]) => (
           <div key={name} className="grid grid-cols-12 items-center gap-x-4">
-            <span className="col-span-4 capitalize place-self-center">{name}</span>
-            <div className="row-start-2 col-span-4 place-self-center border w-14 h-14 flex items-center justify-center">
+            <span className="col-span-12 capitalize">{name}</span>
+            <div className="row-start-2 col-span-4 border w-14 h-14 flex items-center justify-center">
               {isEditMode
                 ? <input type="number" defaultValue={value ?? ""} onChange={handleChange(name)} className="w-full m-2 text-center" />
                 : <span>{calculateAttributeValue(name as any, characterSheet)}</span>
