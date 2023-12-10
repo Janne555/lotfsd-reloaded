@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AttributesSchema, Effect, EffectSchema } from '../types'
-import { FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
+import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
 import { deCamel } from '../utils/utils'
 import { nanoid } from 'nanoid'
 import { useMemo } from 'react'
@@ -9,11 +9,13 @@ import { useMutateCharSheet } from '../hooks'
 
 type Props = {
   onClose?: () => void
+  defaultValues?: Partial<Effect>
 }
 
-export const EffectForm = ({ onClose }: Props) => {
+export const EffectForm = ({ onClose, defaultValues }: Props) => {
   const { handleSubmit, control, formState: { errors }, watch } = useForm<Effect>({
-    resolver: zodResolver(EffectSchema)
+    resolver: zodResolver(EffectSchema),
+    defaultValues
   })
 
   const mutateCharSheet = useMutateCharSheet()
@@ -23,7 +25,13 @@ export const EffectForm = ({ onClose }: Props) => {
 
   const onSubmit: SubmitHandler<Effect> = async (data) => {
     await mutateCharSheet((draft) => {
-      draft.effects.push(data)
+      if (defaultValues?.id) {
+        const index = draft.effects.findIndex((effect) => effect.id === defaultValues?.id)
+        draft.effects[index] = data
+        return
+      } else {
+        draft.effects.push(data)
+      }
     })
     onClose?.()
   }
@@ -51,6 +59,7 @@ export const EffectForm = ({ onClose }: Props) => {
           <FormLabel error={Boolean(errors.effect)} id="effect-form-effect">Effect</FormLabel>
           <RadioGroup
             aria-labelledby="effect-form-effect"
+            defaultValue={defaultValues?.effect ?? "unknown"}
             row
           >
             <Controller
@@ -87,7 +96,7 @@ export const EffectForm = ({ onClose }: Props) => {
                 error={Boolean(errors.targetCategory)}
                 labelId="effect-form-category"
                 label="Category"
-                defaultValue="none"
+                defaultValue={defaultValues?.targetCategory ?? "none"}
                 {...field}
               >
                 <MenuItem value="none" className="capitalize"></MenuItem>
@@ -112,7 +121,7 @@ export const EffectForm = ({ onClose }: Props) => {
                     error={Boolean(errors.targetSubCategory)}
                     labelId="effect-form-attribute"
                     label="Attribute"
-                    defaultValue="none"
+                    defaultValue={defaultValues?.targetSubCategory ?? "none"}
                     {...field}
                   >
                     <MenuItem value="none" className="capitalize"></MenuItem>
@@ -133,7 +142,10 @@ export const EffectForm = ({ onClose }: Props) => {
             />
           </>
         )}
-        <button>submit</button>
+        <div className="flex justify-evenly">
+          <Button type="button" onClick={onClose}>Cancel</Button>
+          <Button variant='contained' type="submit">Submit</Button>
+        </div>
       </form>
     </div>
   )

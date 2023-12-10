@@ -9,10 +9,11 @@ import { InfoBar } from "../components/InfoBar"
 import { Languages } from "../components/Languages"
 import { SavingThrows } from "../components/SavingThrows"
 import { Effects } from "../components/Effects"
-import { Route, Routes, useNavigate } from "react-router-dom"
+import { Route, Routes, useMatch, useNavigate } from "react-router-dom"
 import { characterIdAtom } from "../atoms"
 import { useAtomValue } from "jotai"
 import { EffectForm } from "../forms/Effect.form"
+import { useCharacterSheet } from "../hooks"
 
 export const InfoPage = () => {
   const characterId = useAtomValue(characterIdAtom)
@@ -58,7 +59,35 @@ export const InfoPage = () => {
             </Box>
           </Modal>
         } />
+        <Route path="/effects/:effectId" element={<EditEffectModal onClose={handleClose} />} />
       </Routes>
     </div>
+  )
+}
+
+type EditEffectModalProps = {
+  onClose?: () => void
+}
+
+const EditEffectModal = ({ onClose }: EditEffectModalProps) => {
+  const navigate = useNavigate()
+  const match = useMatch('/character-sheet/:id/info/effects/:effectId')
+  const effectId = match?.params.effectId
+  const characterSheet = useCharacterSheet()
+  const effect = characterSheet.effects.find(e => e.id === effectId)
+  if (!effect) {
+    navigate(`/character-sheet/${match?.params.id}/info`)
+    return null
+  }
+
+  return (
+    <Modal
+      open
+      onClose={onClose}
+    >
+      <Box>
+        <EffectForm defaultValues={effect} onClose={onClose} />
+      </Box>
+    </Modal>
   )
 }
