@@ -5,6 +5,7 @@ import { Box, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText
 import { useNavigate } from "react-router-dom"
 import FaceIcon from '@mui/icons-material/Face'
 import Typography from '@mui/material/Typography'
+import { resetStorage } from "./storage"
 
 export const StartPage = () => {
   const characterSheets = useAtomValue(characterSheetsAtom)
@@ -33,6 +34,7 @@ export const StartPage = () => {
         </List>
       </Box>
       <Button variant="outlined" onClick={handleAddNew} className="self-start">Add New Character</Button>
+      <Button onClick={() => resetStorage()}>Reset App</Button>
     </Page>
   )
 }

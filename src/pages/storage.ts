@@ -45,3 +45,9 @@ export async function saveCharacterSheet(characterSheet: CharacterSheet) {
     console.error('Error saving character sheet:', error)
   }
 }
+
+export async function resetStorage() {
+  await localForage.clear()
+  const characterSheets = (await import('../mockdata')).mockData.characterSheets
+  await localForage.setItem('characterSheets', characterSheets)
+}
