@@ -76,6 +76,7 @@ const SpellSlotSchema = z.object({
 
 const CombatOptionSchema = z.object({
   name: z.string(),
+  id: z.string()
 })
 
 const InfoSchema = z.object({
@@ -112,6 +113,7 @@ const CombatInfoSchema = z.object({
   rangedAB: AttackBonusSchema,
   maxHP: HitPointsSchema,
   currentHP: HitPointsSchema,
+  tempHP: HitPointsSchema,
   surpriseChance: SurpriseChanceSchema,
 })
 

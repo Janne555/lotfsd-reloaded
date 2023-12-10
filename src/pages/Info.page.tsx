@@ -1,9 +1,7 @@
 import { Box, Modal, Typography } from "@mui/material"
 import { Activities } from "../components/Activities"
-import { ArmorClass } from "../components/ArmorClass"
 import { Attributes } from "../components/Attributes"
 import { CombatInfo } from "../components/CombatInfo"
-import { CombatOptions } from "../components/CombatOptions"
 import { Encumbrance } from "../components/Encumbrance"
 import { InfoBar } from "../components/InfoBar"
 import { Languages } from "../components/Languages"
@@ -43,8 +41,6 @@ export const InfoPage = () => {
       <Effects />
       <SavingThrows />
       <CombatInfo />
-      <ArmorClass />
-      <CombatOptions />
       <Activities />
       <Encumbrance />
       <Languages />

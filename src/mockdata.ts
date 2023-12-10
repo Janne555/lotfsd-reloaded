@@ -204,22 +204,25 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
     currentHP: {
       value: 10
     },
+    tempHP: {
+      value: 10
+    },
     surpriseChance: {
       value: 6
     },
   },
   armorClasses: {
     melee: {
-      value: 10
+      value: 12
     },
     ranged: {
-      value: 10
+      value: 12
     },
     withoutShield: {
-      value: 10
+      value: 12
     },
     surprised: {
-      value: 10
+      value: 12
     },
   },
   spells: [

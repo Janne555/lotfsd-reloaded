@@ -3,6 +3,7 @@ import { characterSheetAtom, editModeAtom, tempCharacterSheetReadWriteAtom } fro
 import { produce } from "immer"
 import { CharacterSheet } from "./types"
 import { saveCharacterSheet } from "./pages/storage"
+import { collectEffects } from "./utils/effect.utils"
 
 export function useMutateTempCharSheet() {
   const [tempCharacterSheet, setTempCharacterSheet] = useAtom(tempCharacterSheetReadWriteAtom)
@@ -56,5 +57,5 @@ export function useCharacterSheet() {
 }
 
 export function useEffects() {
-  return useCharacterSheet().effects
+  return collectEffects(useCharacterSheet())
 }

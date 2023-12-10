@@ -8,12 +8,12 @@ export function calculateSavingThrow(name: keyof SavingThrows, characterSheet: C
       && effect.active
   )
   if (valueEffects.find(effect => effect.effect === "replace")) {
-    return valueEffects.find(effect => effect.effect === "replace")?.valueNum ?? 0
+    return Number(valueEffects.find(effect => effect.effect === "replace")?.value ?? 0)
   }
 
   return valueEffects.reduce((total, effect) => {
     if (effect.effect === "add") {
-      return total + (effect.valueNum ?? 0)
+      return total + Number((effect.value ?? 0))
     }
     return total
   }, attributeValue.value)
