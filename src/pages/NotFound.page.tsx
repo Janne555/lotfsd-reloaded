@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material"
-import { Page } from "../components/Layouts"
 import { NavLink } from "react-router-dom"
+import { Page } from "../layouts/Page"
 
 export const NotFoundPage = () => {
   return (

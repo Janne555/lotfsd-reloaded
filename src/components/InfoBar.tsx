@@ -5,6 +5,7 @@ import { deCamel } from "../utils/utils"
 import { Typography } from "@mui/material"
 import { useMutateTempCharSheet, useCharacterSheet } from "../hooks"
 import { Info } from "../types"
+import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
 
 export function InfoBar() {
   const { info } = useCharacterSheet()
@@ -20,8 +21,8 @@ export function InfoBar() {
   }
 
   return (
-    <section id="infobar" className="ch-box">
-      <Typography variant="h2">Basic Info</Typography>
+    <CharacterSheetComponent>
+      <Typography variant="h3">Basic Info</Typography>
       <div className="grid grid-cols-2 gap-2">
         {
           Object.entries(info).map(([key, value]) => (
@@ -35,7 +36,7 @@ export function InfoBar() {
           ))
         }
       </div>
-    </section>
+    </CharacterSheetComponent>
   )
 }
 

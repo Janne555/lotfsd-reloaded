@@ -1,13 +1,14 @@
 import { useAtomValue } from "jotai"
 import { characterSheetAtom } from "../atoms"
 import { Typography } from "@mui/material"
+import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
 
 export function CombatOptions() {
   const { combatOptions } = useAtomValue(characterSheetAtom)
 
   return (
-    <section id="combatoptions" className="ch-box">
-      <Typography variant='h2'>Combat Options</Typography>
+    <CharacterSheetComponent>
+      <Typography variant='h3'>Combat Options</Typography>
       <ul className="list-disc">
         {combatOptions.map((combatOption, i) => (
           <li key={i} className="">
@@ -15,6 +16,6 @@ export function CombatOptions() {
           </li>
         ))}
       </ul>
-    </section>
+    </CharacterSheetComponent>
   )
 }

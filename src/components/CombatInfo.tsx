@@ -8,6 +8,7 @@ import { calculateAttackBonus } from '../utils/ab.utils'
 import { calculateArmorClass } from '../utils/armorClass.utils'
 import { Add, Delete } from '@mui/icons-material'
 import { ArmorClasses, CombatInfo as CombatInfoType } from '../types'
+import { CharacterSheetComponent } from '../layouts/CharacterSheetComponent'
 
 export function CombatInfo() {
   const characterSheet = useCharacterSheet()
@@ -36,9 +37,9 @@ export function CombatInfo() {
   }
 
   return (
-    <section id="combatinfo" className="ch-box gap-4 flex flex-col">
-      <Typography variant='h2'>Combat Info</Typography>
-      <Typography variant='h3'>Attack Bonuses</Typography>
+    <CharacterSheetComponent>
+      <Typography variant='h3'>Combat Info</Typography>
+      <Typography variant='h4'>Attack Bonuses</Typography>
       <div className='grid grid-flow-col auto-cols-fr pt-4 gap-4'>
         <CombatInfoCard
           isEditMode={isEditMode}
@@ -62,7 +63,7 @@ export function CombatInfo() {
           displayValue={calculateAttackBonus('rangedAB', characterSheet)}
         />
       </div>
-      <Typography variant='h3'>Armor Classes</Typography>
+      <Typography variant='h4'>Armor Classes</Typography>
       <div className='grid grid-flow-col auto-cols-fr pt-4 gap-4'>
         <CombatInfoCard
           isEditMode={isEditMode}
@@ -94,7 +95,7 @@ export function CombatInfo() {
           displayValue={calculateArmorClass('surprised', characterSheet)}
         />
       </div>
-      <Typography variant='h3'>Health</Typography>
+      <Typography variant='h4'>Health</Typography>
       <div className='grid grid-flow-col auto-cols-fr pt-4 gap-4'>
         <CombatInfoCard
           isEditMode={isEditMode}
@@ -118,7 +119,7 @@ export function CombatInfo() {
           displayValue={combatInfo.maxHP.value}
         />
       </div>
-      <Typography variant='h3'>Misc</Typography>
+      <Typography variant='h4'>Misc</Typography>
       <div className='grid grid-cols-3 pt-4 gap-4'>
         <Card variant='elevation' className='h-30'>
           <CardContent className='grid grid-rows-2 justify-center text-center h-full'>
@@ -153,7 +154,7 @@ export function CombatInfo() {
           </CardContent>
         </Card>
       </div>
-    </section >
+    </CharacterSheetComponent>
   )
 }
 

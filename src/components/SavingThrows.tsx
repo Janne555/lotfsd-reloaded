@@ -8,6 +8,7 @@ import { calculateSavingThrow } from '../utils/savingThrows.utils'
 import { Close, QuestionMark } from '@mui/icons-material'
 import { useState } from 'react'
 import { calculateAttributeModifier } from '../utils/attributes.utils'
+import { CharacterSheetComponent } from '../layouts/CharacterSheetComponent'
 
 
 export function SavingThrows() {
@@ -23,8 +24,8 @@ export function SavingThrows() {
   }
 
   return (
-    <section id="savingthrows" className="ch-box">
-      <Typography variant='h2'>Saving Throws</Typography>
+    <CharacterSheetComponent>
+      <Typography variant='h3'>Saving Throws</Typography>
       <div className="flex flex-col gap-4">
         {
           Object.entries(characterSheet.savingThrows).map(([name, { value }]) => (
@@ -65,7 +66,7 @@ export function SavingThrows() {
           }
         />
       </div>
-    </section >
+    </CharacterSheetComponent>
   )
 }
 

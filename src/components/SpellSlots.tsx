@@ -3,6 +3,7 @@ import { characterSheetAtom } from "../atoms";
 import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { calculateSpellSlots } from "../utils/spellSlot.utils";
 import { useMutateCharSheet } from "../hooks";
+import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent";
 
 export function SpellSlots() {
   const { spellSlots, spells } = useAtomValue(characterSheetAtom)
@@ -16,9 +17,9 @@ export function SpellSlots() {
   }
 
   return (
-    <section id="spellslots" className="ch-box flex flex-col gap-4">
-      <Typography variant="h2">Spell Slots</Typography>
-      <Typography variant="h3">Totals</Typography>
+    <CharacterSheetComponent>
+      <Typography variant="h3">Spell Slots</Typography>
+      <Typography variant="h4">Totals</Typography>
       <TableContainer>
         <Table>
           <TableHead>
@@ -37,7 +38,7 @@ export function SpellSlots() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Typography variant="h3">Prepared spells</Typography>
+      <Typography variant="h4">Prepared spells</Typography>
       <TableContainer>
         <Table>
           <TableHead>
@@ -70,6 +71,6 @@ export function SpellSlots() {
           </TableBody>
         </Table>
       </TableContainer>
-    </section>
-  );
+    </CharacterSheetComponent>
+  )
 }

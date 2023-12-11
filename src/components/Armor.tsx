@@ -2,14 +2,15 @@ import { useAtomValue } from 'jotai'
 import { characterSheetAtom } from '../atoms'
 import { Checkbox, FormControlLabel, Typography } from '@mui/material'
 import { useMutateCharSheet } from '../hooks'
+import { CharacterSheetComponent } from '../layouts/CharacterSheetComponent'
 
 export const Armor = () => {
   const { encumbrance } = useAtomValue(characterSheetAtom)
   const mutateCharSheet = useMutateCharSheet()
 
   return (
-    <section id="armor" className="ch-box p-2 py-4">
-      <Typography variant="h2">Armor</Typography>
+    <CharacterSheetComponent>
+      <Typography variant="h3">Armor</Typography>
       <FormControlLabel
         control={<Checkbox checked={encumbrance.characterIsWearingChainMail} onChange={(e) =>
           mutateCharSheet(draft => {
@@ -26,6 +27,6 @@ export const Armor = () => {
         } />}
         label="Wearing Plate Mail"
       />
-    </section>
+    </CharacterSheetComponent>
   )
 }

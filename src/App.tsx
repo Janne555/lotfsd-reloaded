@@ -1,19 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Suspense, useEffect, useRef, useState } from 'react'
-import CircularProgress from '@mui/material/CircularProgress'
+import { Suspense, useRef } from 'react'
 import { StartPage } from './pages/Start.page'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useSyncPathToAtom } from './atoms'
-import { InfoPage } from './pages/Info.page'
-import { Page } from './components/Layouts'
-import { Navigation } from './components/Navigation'
-import { InventoryPage } from './pages/Inventory.page'
-import { SpellsPage } from './pages/Spells.page'
-import { FloatingSaveButton } from './components/FloatingSaveButton'
 import { NotFoundPage } from './pages/NotFound.page'
 import { ErrorBoundary } from './components/ErrorBoundary'
-import { Fab } from '@mui/material'
-import { Navigation as NavigationIcon } from '@mui/icons-material'
+import { LoadingPage } from './pages/Loading.page'
+import { CharacterSheetPage } from './pages/CharacterSheet.page'
+import { Page } from './layouts/Page'
 
 const theme = createTheme({
   typography: {
@@ -37,57 +31,27 @@ const theme = createTheme({
 
 function App() {
   const rootRef = useRef<HTMLDivElement>(null)
-  const [showScrollButton, setShowScrollButton] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      setShowScrollButton(!entry.isIntersecting)
-    })
-    if (rootRef.current) {
-      observer.observe(rootRef.current)
-    }
-    return () => {
-      if (rootRef.current) {
-        observer.unobserve(rootRef.current)
-      }
-    }
-  }, [])
 
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <WithPathMatch>
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<LoadingPage />}>
             <div ref={rootRef} />
             <Routes>
               <Route path="/" element={<StartPage />} />
               <Route path="/character-sheet/new" element={<NotFoundPage />} />
               <Route path="/character-sheet/:id/*" element={
                 <ErrorBoundary>
-                  <Page>
-                    <Navigation />
-                    <Routes>
-                      <Route path="/info/*" element={<InfoPage />} />
-                      <Route path="/inventory/*" element={<InventoryPage />} />
-                      <Route path="/spells/*" element={<SpellsPage />} />
-                    </Routes>
-                    <FloatingSaveButton />
-                  </Page>
+                  <Suspense fallback={<LoadingPage />}>
+                    <Page>
+                      <CharacterSheetPage />
+                    </Page>
+                  </Suspense>
                 </ErrorBoundary>
               } />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
-            {showScrollButton && (
-              <>
-                <div className="mt-24" />
-                <div className="fixed bottom-4 right-4">
-                  <Fab variant="extended" onClick={() => rootRef.current?.scrollIntoView()}>
-                    <NavigationIcon />
-                    Back to top
-                  </Fab>
-                </div>
-              </>
-            )}
           </Suspense>
         </WithPathMatch>
       </BrowserRouter>

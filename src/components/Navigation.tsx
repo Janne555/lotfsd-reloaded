@@ -1,27 +1,25 @@
-import { useAtom, useAtomValue } from "jotai"
-import { characterIdAtom, editModeAtom } from "../atoms"
-import { NavLink } from "react-router-dom";
-import { Typography } from "@mui/material";
-import { useEditMode } from "../hooks";
+import { BottomNavigation, BottomNavigationAction } from "@mui/material"
+import { Briefcase4Line, DiceIcon, InformationIcon, MagicFillIcon, SwordIcon } from "../icons"
 
-export const Navigation = () => {
-  const characterId = useAtomValue(characterIdAtom)
-  const [isEditMode] = useAtom(editModeAtom)
+type Props = {
+  value: string
+}
 
-  const { setEditModeOff, setEditModeOn } = useEditMode()
-
+export const Navigation = ({ value }: Props) => {
   return (
-    <nav className="ch-box p-4 flex flex-col gap-4 items-start">
-      <NavLink to={`/`}>Back to Character Selection</NavLink>
-      <Typography variant="h1">Charactersheet Sections</Typography>
-      <div className="flex gap-4">
-        <NavLink to={`/character-sheet/${characterId?.params.id}/info`}>Info</NavLink>
-        <NavLink to={`/character-sheet/${characterId?.params.id}/inventory`}>Inventory</NavLink>
-        <NavLink to={`/character-sheet/${characterId?.params.id}/spells`}>Spells</NavLink>
-      </div>
-      <button onClick={() => isEditMode ? setEditModeOff() : setEditModeOn()}>
-        {isEditMode ? "Disable Edit Mode" : "Enable Edit Mode"}
-      </button>
-    </nav>
-  );
-};
+    <div className="fixed bottom-0 border w-full">
+      <BottomNavigation
+        showLabels
+        value={value}
+        className="grid-cols-5 w-full overflow-x-auto"
+      >
+        <BottomNavigationAction href="#info" value="info" label="info" icon={<InformationIcon />} />
+        <BottomNavigationAction href="#attributes" value="attributes" label="Attributes" icon={<DiceIcon />} />
+        <BottomNavigationAction href="#combatinfo" value="combatinfo" label="Combat" icon={<SwordIcon />} />
+        <BottomNavigationAction href="#spells" value="spells" label="Spells" icon={<MagicFillIcon />} />
+        <BottomNavigationAction href="#equipment" value="equipment" label="Equipment" icon={<Briefcase4Line />} />
+      </BottomNavigation>
+    </div>
+
+  )
+}

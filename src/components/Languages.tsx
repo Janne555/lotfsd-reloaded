@@ -4,6 +4,7 @@ import { partition } from "../utils/utils"
 import { IconButton, List, ListItem, ListItemText, Typography } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useMutateCharSheet } from "../hooks"
+import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
 
 export function Languages() {
   const { languages } = useAtomValue(characterSheetAtom)
@@ -17,9 +18,9 @@ export function Languages() {
   }
 
   return (
-    <section id="languages" className="ch-box">
-      <Typography variant="h2">Languages</Typography>
-      <Typography variant="h3">Known</Typography>
+    <CharacterSheetComponent>
+      <Typography variant="h3">Languages</Typography>
+      <Typography variant="h4">Known</Typography>
       <List>
         {known.map(lang => (
           <ListItem key={lang.name} secondaryAction={<IconButton onClick={handleDelete(lang.name)}><DeleteIcon /></IconButton>}>
@@ -27,7 +28,7 @@ export function Languages() {
           </ListItem>
         ))}
       </List>
-      <Typography variant="h3">Not Known</Typography>
+      <Typography variant="h4">Not Known</Typography>
       <List>
         {notKnown.map(lang => (
           <ListItem key={lang.name} secondaryAction={<IconButton onClick={handleDelete(lang.name)}><DeleteIcon /></IconButton>}>
@@ -35,6 +36,6 @@ export function Languages() {
           </ListItem>
         ))}
       </List>
-    </section>
+    </CharacterSheetComponent>
   )
 }

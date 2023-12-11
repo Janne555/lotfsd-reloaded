@@ -4,6 +4,7 @@ import { deCamel } from "../utils/utils"
 import { encumbranceValueToState } from "../utils/encumbrance.utils"
 import { calculateEncumbrance } from "../utils/encumbrance.utils"
 import { Typography } from "@mui/material"
+import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
 
 export function Encumbrance() {
   const characterSheet = useAtomValue(characterSheetAtom)
@@ -12,8 +13,8 @@ export function Encumbrance() {
   const description = descriptions[state]
 
   return (
-    <section id="encumbrance" className="ch-box">
-      <Typography variant='h2'>Encumbrance</Typography>
+    <CharacterSheetComponent>
+      <Typography variant='h3'>Encumbrance</Typography>
       <div className="grid grid-cols-2 gap-x-4">
         <span className="">State</span>
         <span className="capitalize">{deCamel(state)}</span>
@@ -28,7 +29,7 @@ export function Encumbrance() {
         <span className="">Per Day</span>
         <span>{description.perDay}</span>
       </div>
-    </section>
+    </CharacterSheetComponent>
   )
 }
 

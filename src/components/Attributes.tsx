@@ -5,12 +5,13 @@ import { useAtomValue } from 'jotai'
 import { useMutateTempCharSheet, useCharacterSheet } from '../hooks'
 import { calculateAttributeModifier } from "../utils/attributes.utils"
 import { calculateAttributeValue } from "../utils/attributes.utils"
+import { CharacterSheetComponent } from '../layouts/CharacterSheetComponent'
 
 export function Attributes() {
   const characterSheet = useCharacterSheet()
   const isEditMode = useAtomValue(editModeAtom)
   const updateCharacterSheet = useMutateTempCharSheet()
-3
+  3
   const handleChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.valueAsNumber
     updateCharacterSheet(ch => {
@@ -19,8 +20,8 @@ export function Attributes() {
   }
 
   return (
-    <section id="attributes" className="ch-box">
-      <Typography variant='h2'>Attributes</Typography>
+    <CharacterSheetComponent>
+      <Typography variant='h3'>Attributes</Typography>
       {
         Object.entries(characterSheet.attributes).map(([name, { value }]) => (
           <div key={name} className="grid grid-cols-12 items-center gap-x-4">
@@ -38,7 +39,7 @@ export function Attributes() {
           </div>
         ))
       }
-    </section>
+    </CharacterSheetComponent>
   )
 }
 

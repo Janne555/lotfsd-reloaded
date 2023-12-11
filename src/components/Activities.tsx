@@ -4,6 +4,7 @@ import { DieFace } from './DieFace'
 import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from '../hooks'
 import { Add, Delete } from '@mui/icons-material'
 import { nanoid } from 'nanoid'
+import { CharacterSheetComponent } from '../layouts/CharacterSheetComponent'
 
 export function Activities() {
   const { activities } = useCharacterSheet()
@@ -37,8 +38,8 @@ export function Activities() {
   }
 
   return (
-    <Box id="activities" className="ch-box">
-      <Typography variant="h2">Common Activities</Typography>
+    <CharacterSheetComponent>
+      <Typography variant="h3">Common Activities</Typography>
       <Box className="flex flex-wrap gap-4">
         {activities.map(({ value, name, id }) => (
           <Box key={id} className="w-24 flex flex-col items-center justify-items-center">
@@ -57,6 +58,6 @@ export function Activities() {
           </Box>
         )}
       </Box>
-    </Box>
+    </CharacterSheetComponent>
   )
 }

@@ -3,6 +3,7 @@ import { useEffects, useMutateCharSheet } from '../hooks'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAtomValue } from 'jotai'
 import { characterIdAtom } from '../atoms'
+import { CharacterSheetComponent } from '../layouts/CharacterSheetComponent'
 
 export function Effects() {
   const characterId = useAtomValue(characterIdAtom)
@@ -11,8 +12,8 @@ export function Effects() {
   const navigate = useNavigate()
 
   return (
-    <section id="effects" className="ch-box">
-      <Typography variant="h2">Effects</Typography>
+    <CharacterSheetComponent>
+      <Typography variant="h3">Effects</Typography>
       <Link to={`/character-sheet/${characterId?.params.id}/info/add-effect`}>Add Effect</Link>
       <List>
         {effects.map((effect, index) => (
@@ -40,6 +41,6 @@ export function Effects() {
           </ListItem>
         ))}
       </List>
-    </section>
+    </CharacterSheetComponent>
   )
 }
