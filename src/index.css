@@ -21,3 +21,11 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+h1, h2 {
+  @apply text-center;
+}
+
+h3, h4 {
+  @apply pt-4;
+}

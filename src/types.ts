@@ -45,6 +45,8 @@ const ItemSchema = z.object({
   name: z.string(),
   oversized: z.boolean(),
   id: z.string(),
+  quantity: z.number().optional(),
+  stackSize: z.number().optional(),
 })
 
 const WeaponSchema = z.object({

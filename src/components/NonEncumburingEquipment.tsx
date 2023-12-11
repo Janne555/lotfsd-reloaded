@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai"
 import { characterSheetAtom } from "../atoms"
-import { Typography } from "@mui/material"
+import { List, ListItem, Typography } from "@mui/material"
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
 
 export function NonEncumburingEquipment() {
@@ -8,13 +8,13 @@ export function NonEncumburingEquipment() {
   return (
     <CharacterSheetComponent>
       <Typography variant="h3">Non-Encumbering Equipment</Typography>
-      <ul className="list-disc">
+      <List className="list-disc">
         {nonEncumberingEquipment.map((item, i) => (
-          <li key={i} className="">
+          <ListItem key={i} className="">
             <span>{item.name}</span>
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </CharacterSheetComponent>
   )
 }

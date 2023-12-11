@@ -1,7 +1,5 @@
-import { Getter, atom, useSetAtom } from "jotai"
+import { Getter, atom } from "jotai"
 import { getCharacterSheet, getCharacterSheets } from "./pages/storage"
-import { matchPath, useLocation } from 'react-router-dom'
-import { useEffect } from "react"
 import { CharacterSheet } from "./types"
 
 export function atomWithRefresh<T>(fn: (get: Getter) => T) {
@@ -16,30 +14,14 @@ export function atomWithRefresh<T>(fn: (get: Getter) => T) {
   )
 }
 
-function pathMatchAtom<Path extends string>(path: Path) {
-  return atom((get) => {
-    const pathname = get(pathAtom)
-    return matchPath(path, pathname)
-  })
-}
-
-export function useSyncPathToAtom() {
-  const setPathname = useSetAtom(pathAtom)
-  const location = useLocation()
-  useEffect(() => {
-    setPathname(location.pathname)
-  }, [location.pathname])
-}
-
-const pathAtom = atom(window.location.pathname)
-
 export const characterSheetsAtom = atomWithRefresh(() => getCharacterSheets())
 
-export const characterIdAtom = pathMatchAtom('/character-sheet/:id/*')
+export const characterIdAtom = atom<string | undefined>(undefined)
 
 export const characterSheetAtom = atomWithRefresh(async (get) => {
   const characterId = get(characterIdAtom)
-  const sheet = await getCharacterSheet(characterId?.params.id ?? '')
+  if (!characterId) throw new Promise(() => { })
+  const sheet = await getCharacterSheet(characterId ?? '')
   if (!sheet) throw Error("Character sheet not found")
   return sheet
 })

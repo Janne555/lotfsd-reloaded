@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material'
 import { Attributes as AttributesType } from '../types'
 import { editModeAtom } from '../atoms'
 import { useAtomValue } from 'jotai'
@@ -21,7 +20,6 @@ export function Attributes() {
 
   return (
     <CharacterSheetComponent>
-      <Typography variant='h3'>Attributes</Typography>
       {
         Object.entries(characterSheet.attributes).map(([name, { value }]) => (
           <div key={name} className="grid grid-cols-12 items-center gap-x-4">

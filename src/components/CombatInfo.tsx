@@ -38,8 +38,7 @@ export function CombatInfo() {
 
   return (
     <CharacterSheetComponent>
-      <Typography variant='h3'>Combat Info</Typography>
-      <Typography variant='h4'>Attack Bonuses</Typography>
+      <Typography variant='h3'>Attack Bonuses</Typography>
       <div className='grid grid-flow-col auto-cols-fr pt-4 gap-4'>
         <CombatInfoCard
           isEditMode={isEditMode}
@@ -63,7 +62,7 @@ export function CombatInfo() {
           displayValue={calculateAttackBonus('rangedAB', characterSheet)}
         />
       </div>
-      <Typography variant='h4'>Armor Classes</Typography>
+      <Typography variant='h3'>Armor Classes</Typography>
       <div className='grid grid-flow-col auto-cols-fr pt-4 gap-4'>
         <CombatInfoCard
           isEditMode={isEditMode}
@@ -95,7 +94,7 @@ export function CombatInfo() {
           displayValue={calculateArmorClass('surprised', characterSheet)}
         />
       </div>
-      <Typography variant='h4'>Health</Typography>
+      <Typography variant='h3'>Health</Typography>
       <div className='grid grid-flow-col auto-cols-fr pt-4 gap-4'>
         <CombatInfoCard
           isEditMode={isEditMode}
@@ -119,7 +118,7 @@ export function CombatInfo() {
           displayValue={combatInfo.maxHP.value}
         />
       </div>
-      <Typography variant='h4'>Misc</Typography>
+      <Typography variant='h3'>Misc</Typography>
       <div className='grid grid-cols-3 pt-4 gap-4'>
         <Card variant='elevation' className='h-30'>
           <CardContent className='grid grid-rows-2 justify-center text-center h-full'>

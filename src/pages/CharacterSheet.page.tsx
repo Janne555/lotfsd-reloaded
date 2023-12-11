@@ -6,9 +6,9 @@ import { InfoBar } from "../components/InfoBar"
 import { Languages } from "../components/Languages"
 import { SavingThrows } from "../components/SavingThrows"
 import { Effects } from "../components/Effects"
-import { NavLink, Route, Routes, useNavigate } from "react-router-dom"
+import { NavLink, Route, Routes, useMatch, useNavigate } from "react-router-dom"
 import { characterIdAtom } from "../atoms"
-import { useAtomValue } from "jotai"
+import { useAtom } from "jotai"
 import { EffectModal } from "../modals/EditEffectModal"
 import { SpellSlots } from "../components/SpellSlots"
 import { Spells } from "../components/Spells"
@@ -22,9 +22,14 @@ import { CharacterSheetSection } from "../layouts/CharacterSheetSection"
 import { useEffect, useState } from "react"
 
 export const CharacterSheetPage = () => {
-  const characterId = useAtomValue(characterIdAtom)
+  const match = useMatch('/character-sheet/:characterId/*')
+  const [characterId, setCharacterId] = useAtom(characterIdAtom)
   const navigate = useNavigate()
   const [activeSection, setActiveSection] = useState('info')
+
+  if (match?.params.characterId !== characterId) {
+    setCharacterId(match?.params.characterId)
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -39,18 +44,19 @@ export const CharacterSheetPage = () => {
     return () => sections.forEach((section) => observer.unobserve(section))
   }, [])
 
-  const handleClose = () => navigate(`/character-sheet/${characterId?.params.id}/info`)
+  const handleClose = () => navigate(`/character-sheet/${characterId}/info`)
 
   return (
     <div className="flex flex-col gap-y-4">
       {/* @ts-ignore */}
       <Button className="block mt-4 p-4" LinkComponent={NavLink} to={`/`}>Back to Character Selection</Button>
+      <Typography variant="h1">Character Sheet</Typography>
       <CharacterSheetSection id="info">
         <Typography variant="h2">Info</Typography>
         <InfoBar />
         <Languages />
-        <Effects />
         <Activities />
+        <Effects />
       </CharacterSheetSection>
       <CharacterSheetSection id="attributes">
         <Typography variant="h2">Attributes</Typography>
@@ -78,6 +84,7 @@ export const CharacterSheetPage = () => {
         <Route path="/add-effect" element={<EffectModal onClose={handleClose} />} />
         <Route path="/effects/:effectId" element={<EffectModal editMode onClose={handleClose} />} />
       </Routes>
+      <div className="h-40" />
       <Navigation value={activeSection} />
     </div>
   )

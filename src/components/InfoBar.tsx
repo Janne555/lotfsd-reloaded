@@ -22,7 +22,6 @@ export function InfoBar() {
 
   return (
     <CharacterSheetComponent>
-      <Typography variant="h3">Basic Info</Typography>
       <div className="grid grid-cols-2 gap-2">
         {
           Object.entries(info).map(([key, value]) => (

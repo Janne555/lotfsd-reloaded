@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Suspense, useRef } from 'react'
 import { StartPage } from './pages/Start.page'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { useSyncPathToAtom } from './atoms'
 import { NotFoundPage } from './pages/NotFound.page'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { LoadingPage } from './pages/Loading.page'
@@ -35,7 +34,6 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <WithPathMatch>
           <Suspense fallback={<LoadingPage />}>
             <div ref={rootRef} />
             <Routes>
@@ -53,18 +51,8 @@ function App() {
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
-        </WithPathMatch>
       </BrowserRouter>
     </ThemeProvider >
-  )
-}
-
-function WithPathMatch({ children }: { children: React.ReactNode }) {
-  useSyncPathToAtom()
-  return (
-    <div>
-      {children}
-    </div>
   )
 }
 

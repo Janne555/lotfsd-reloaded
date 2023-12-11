@@ -14,7 +14,7 @@ export function Effects() {
   return (
     <CharacterSheetComponent>
       <Typography variant="h3">Effects</Typography>
-      <Link to={`/character-sheet/${characterId?.params.id}/info/add-effect`}>Add Effect</Link>
+      <Link to={`/character-sheet/${characterId}/info/add-effect`}>Add Effect</Link>
       <List>
         {effects.map((effect, index) => (
           <ListItem
@@ -34,7 +34,7 @@ export function Effects() {
           >
             <ListItemButton
               dense
-              onClick={() => navigate(`/character-sheet/${characterId?.params.id}/info/effects/${effect.id}`)}
+              onClick={() => navigate(`/character-sheet/${characterId}/info/effects/${effect.id}`)}
             >
               <ListItemText primary={effect.name} />
             </ListItemButton>

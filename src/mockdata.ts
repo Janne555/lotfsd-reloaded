@@ -320,6 +320,35 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
       id: 'spell-slot-8',
       used: false
     },
+  ],
+  languages: [
+    {
+      id: Math.random().toString(),
+      name: 'Common',
+      isKnown: true,
+    },
+    {
+      id: Math.random().toString(),
+      name: 'Kääpiötonttu',
+      isKnown: false,
+    },
+    {
+      id: Math.random().toString(),
+      name: 'Käärmetonttu',
+      isKnown: false,
+    },
+    {
+      id: Math.random().toString(),
+      name: 'Ancient common',
+      isKnown: false,
+    }
+  ],
+  nonEncumberingEquipment: [
+    {
+      id: Math.random().toString(),
+      name: 'Locket',
+      oversized: false
+    }
   ]
 }))
 
