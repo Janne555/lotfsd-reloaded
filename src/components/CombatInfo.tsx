@@ -141,17 +141,21 @@ export function CombatInfo() {
             <CardContent>
               <Typography>{name}</Typography>
             </CardContent>
-            <CardActions className='mt-auto flex justify-end'>
-              <IconButton onClick={handleDeleteCombatOption(id)}><Delete /></IconButton>
-            </CardActions>
+            {isEditMode && (
+              <CardActions className='mt-auto flex justify-end'>
+                <IconButton onClick={handleDeleteCombatOption(id)}><Delete /></IconButton>
+              </CardActions>
+            )}
           </Card>
         ))}
-        <Card variant='elevation' className='h-30 flex flex-col justify-center'>
-          <CardContent className="text-center">
-            <div className="">Add Combat Option</div>
-            <IconButton><Add /></IconButton>
-          </CardContent>
-        </Card>
+        {isEditMode && (
+          <Card variant='elevation' className='h-30 flex flex-col justify-center'>
+            <CardContent className="text-center">
+              <div className="">Add Combat Option</div>
+              <IconButton><Add /></IconButton>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </CharacterSheetComponent>
   )

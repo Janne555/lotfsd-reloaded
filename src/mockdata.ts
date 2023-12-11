@@ -349,6 +349,12 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
       name: 'Locket',
       oversized: false
     }
+  ],
+  combatOptions: [
+    {
+      id: Math.random().toString(),
+      name: 'Cleave',
+    }
   ]
 }))
 

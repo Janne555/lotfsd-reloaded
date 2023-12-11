@@ -34,3 +34,4 @@
 - qr code share
 - gaining spells from items
 - add language
+- when leaving char sheet set edit mode off

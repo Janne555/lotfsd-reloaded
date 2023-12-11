@@ -11,7 +11,7 @@ import { Page } from './layouts/Page'
 const theme = createTheme({
   typography: {
     h1: {
-      fontSize: '2.5rem', // Set your desired size
+      fontSize: '2.5rem'
     },
     h2: {
       fontSize: '2rem',

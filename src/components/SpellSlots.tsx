@@ -8,7 +8,7 @@ import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent";
 export function SpellSlots() {
   const { spellSlots, spells } = useAtomValue(characterSheetAtom)
   const mutateCharSheet = useMutateCharSheet()
-  const sorted = spellSlots.sort((a, b) => a.level - b.level)
+  const sorted = [...spellSlots].sort((a, b) => a.level - b.level)
   const spellSlotCountsAndRemainingSpellSlots = calculateSpellSlots(spellSlots)
 
   const findSpellForSlot = (spellId?: string) => {

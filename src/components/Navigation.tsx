@@ -1,25 +1,54 @@
-import { BottomNavigation, BottomNavigationAction } from "@mui/material"
-import { Briefcase4Line, DiceIcon, InformationIcon, MagicFillIcon, SwordIcon } from "../icons"
+import { Button, IconButton, Typography } from "@mui/material"
+import { Briefcase4Line, DiceIcon, FileListLineIcon, InformationIcon, MagicFillIcon, SwordIcon } from "../icons"
+import { useEditMode } from "../hooks"
+import { useNavigate } from "react-router-dom"
+import styled from "styled-components"
 
 type Props = {
   value: string
 }
 
 export const Navigation = ({ value }: Props) => {
+  const { isEditMode, setEditModeOff } = useEditMode()
+  const navigate = useNavigate()
+
   return (
-    <div className="fixed bottom-0 border w-full">
-      <BottomNavigation
-        showLabels
-        value={value}
-        className="grid-cols-5 w-full overflow-x-auto"
-      >
-        <BottomNavigationAction href="#info" value="info" label="info" icon={<InformationIcon />} />
-        <BottomNavigationAction href="#attributes" value="attributes" label="Attributes" icon={<DiceIcon />} />
-        <BottomNavigationAction href="#combatinfo" value="combatinfo" label="Combat" icon={<SwordIcon />} />
-        <BottomNavigationAction href="#spells" value="spells" label="Spells" icon={<MagicFillIcon />} />
-        <BottomNavigationAction href="#equipment" value="equipment" label="Equipment" icon={<Briefcase4Line />} />
-      </BottomNavigation>
-    </div>
+    <Container className="fixed bottom-0 w-screen overflow-clip flex flex-col items-center gap-4">
+      {isEditMode && <Button onClick={() => setEditModeOff()} variant="contained">Save Changes</Button>}
+      <nav className="grid cols-6 grid-flow-col w-full overflow-x-scroll border bg-white px-4 gap-4">
+        <IconButton onClick={() => navigate('/')} className="flex flex-col items-center">
+          <FileListLineIcon />
+          <Typography>Start</Typography>
+        </IconButton>
+        <IconButton href="#info" className="flex flex-col items-center">
+          <InformationIcon />
+          <Typography>Info</Typography>
+        </IconButton>
+        <IconButton href="#attributes" className="flex flex-col items-center">
+          <DiceIcon />
+          <Typography>Attributes</Typography>
+        </IconButton>
+        <IconButton href="#combat" className="flex flex-col items-center">
+          <SwordIcon />
+          <Typography>Combat</Typography>
+        </IconButton>
+        <IconButton href="#spells" className="flex flex-col items-center">
+          <MagicFillIcon />
+          <Typography>Spells</Typography>
+        </IconButton>
+        <IconButton href="#equipment" className="flex flex-col items-center">
+          <Briefcase4Line />
+          <Typography>Equipment</Typography>
+        </IconButton>
+      </nav>
+    </Container>
 
   )
 }
+
+const Container = styled.div`
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+`
