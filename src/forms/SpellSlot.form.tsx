@@ -28,8 +28,6 @@ export const SpellSlotForm = ({ }: Props) => {
     })
   }
 
-  console.log(errors)
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex gap-4 items-center">
       <input type="hidden" {...register('id')} />

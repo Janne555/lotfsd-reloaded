@@ -1,4 +1,4 @@
-import { Checkbox, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Checkbox, FormControl, IconButton, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { calculateSpellSlots } from "../utils/spellSlot.utils";
 import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks";
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent";
@@ -17,11 +17,6 @@ export function SpellSlots() {
   useEffect(() => {
     setKey(Date.now())
   }, [spellSlots])
-
-  const findSpellForSlot = (spellId?: string) => {
-    const spell = spells.find((s) => s.id === spellId)
-    return spell ? spell.name : "<Not prepared>"
-  }
 
   const handleDelete = (id: string) => () => {
     mutateCharSheet((draft) => {
@@ -63,7 +58,26 @@ export function SpellSlots() {
           <TableBody>
             {sorted.map((spellSlot) => (
               <TableRow key={spellSlot.id}>
-                <TableCell>{findSpellForSlot(spellSlot.preparedSpellId)}</TableCell>
+                <TableCell>
+                  <FormControl fullWidth>
+                    <Select
+                      value={spellSlot.preparedSpellId ?? 'none'}
+                      onChange={(e) => {
+                        mutateCharSheet((ch) => {
+                          const slot = ch.spellSlots.find((s) => s.id === spellSlot.id)
+                          if (slot) {
+                            slot.preparedSpellId = e.target.value
+                          }
+                        })
+                      }}
+                    >
+                      <MenuItem value="none">{"<not prepared>"}</MenuItem>
+                      {spells.filter((spell) => Number(spell.level) <= Number(spellSlot.level)).map((spell) => (
+                        <MenuItem key={spell.id} value={spell.id}>{spell.name}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </TableCell>
                 <TableCell>{spellSlot.level}</TableCell>
                 <TableCell>
                   {isEditMode
