@@ -1,10 +1,7 @@
 # Lamentations of the Fullstack Developer
 
 ## Todo
-- take damage / heal input
 - ability to change equipment order
-- add change handlers
-- add xp
 - xp log
 - level up feature
 - include class information
@@ -17,7 +14,6 @@
   - spell slots
   - attack bonus
 - item sharing via urls
-- rest button
 - class features
   - they probably have effects
   - track if they've been used
@@ -35,3 +31,7 @@
 - gaining spells from items
 - when leaving char sheet set edit mode off
 - edit temp char sheet when in edit mode even for items that can be edited otherwise
+- item improvements
+  - quantity
+  - equipped
+  - effects
