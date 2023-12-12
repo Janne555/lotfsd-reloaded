@@ -59,24 +59,26 @@ export function SpellSlots() {
             {sorted.map((spellSlot) => (
               <TableRow key={spellSlot.id}>
                 <TableCell>
-                  <FormControl fullWidth>
-                    <Select
-                      value={spellSlot.preparedSpellId ?? 'none'}
-                      onChange={(e) => {
-                        mutateCharSheet((ch) => {
-                          const slot = ch.spellSlots.find((s) => s.id === spellSlot.id)
-                          if (slot) {
-                            slot.preparedSpellId = e.target.value
-                          }
-                        })
-                      }}
-                    >
-                      <MenuItem value="none">{"<not prepared>"}</MenuItem>
-                      {spells.filter((spell) => Number(spell.level) <= Number(spellSlot.level)).map((spell) => (
-                        <MenuItem key={spell.id} value={spell.id}>{spell.name}</MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
+                  <div className="w-40">
+                    <FormControl fullWidth>
+                      <Select
+                        value={spellSlot.preparedSpellId ?? 'none'}
+                        onChange={(e) => {
+                          mutateCharSheet((ch) => {
+                            const slot = ch.spellSlots.find((s) => s.id === spellSlot.id)
+                            if (slot) {
+                              slot.preparedSpellId = e.target.value
+                            }
+                          })
+                        }}
+                      >
+                        <MenuItem value="none">{"<not prepared>"}</MenuItem>
+                        {spells.filter((spell) => Number(spell.level) <= Number(spellSlot.level)).map((spell) => (
+                          <MenuItem key={spell.id} value={spell.id}>{spell.name}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </div>
                 </TableCell>
                 <TableCell>{spellSlot.level}</TableCell>
                 <TableCell>
@@ -110,6 +112,6 @@ export function SpellSlots() {
           </TableBody>
         </Table>
       </TableContainer>
-    </CharacterSheetComponent>
+    </CharacterSheetComponent >
   )
 }

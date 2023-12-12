@@ -32,7 +32,7 @@ export function Weapons() {
           }
         })}
         {isEditMode && (
-          <Card variant="elevation" className="w-40 text-center">
+          <Card variant="elevation" className="w-36 text-center">
             <CardContent>
               <Typography variant="h5">Add Weapon</Typography>
               <IconButton><Add /></IconButton>
@@ -52,7 +52,7 @@ type Props = {
 
 const MeleeWeaponCard = ({ weapon, ab, onDelete }: Props) => {
   return (
-    <Card variant="elevation" className="w-40 text-center">
+    <Card variant="elevation" className="w-36 text-center">
       {onDelete && <IconButton onClick={onDelete}><GridDeleteIcon /></IconButton>}
       <CardContent className="flex flex-col gap-2">
         <span className="font-bold">{weapon.name}</span>
@@ -68,7 +68,7 @@ const MeleeWeaponCard = ({ weapon, ab, onDelete }: Props) => {
 
 const RangedWeaponCard = ({ weapon, ab, onDelete }: Props) => {
   return (
-    <Card variant="elevation" className="w-40 text-center">
+    <Card variant="elevation" className="w-36 text-center">
       {onDelete && <IconButton onClick={onDelete}><GridDeleteIcon /></IconButton>}
       <CardContent className="flex flex-col gap-2">
         <span className="font-bold">{weapon.name}</span>
