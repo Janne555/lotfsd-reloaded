@@ -1,22 +1,27 @@
-import { useAtomValue } from "jotai"
-import { characterSheetAtom } from "../atoms"
 import { partition } from "../utils/utils"
 import { IconButton, List, ListItem, ListItemText, Typography } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useEditMode, useMutateCharSheet } from "../hooks"
+import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks"
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
+import { LanguageForm } from "../forms/Language.form"
+import { useEffect, useState } from "react"
 
 export function Languages() {
-  const { languages } = useAtomValue(characterSheetAtom)
+  const { languages } = useCharacterSheet()
   const [known, notKnown] = partition(languages, lang => lang.isKnown)
-  const mutateCharSheet = useMutateCharSheet()
+  const mutateCharSheet = useMutateTempCharSheet()
   const { isEditMode } = useEditMode()
+  const [formKey, setFormKey] = useState(Date.now())
 
   const handleDelete = (name: string) => async () => {
-    await mutateCharSheet(draft => {
+    mutateCharSheet(draft => {
       draft.languages = draft.languages.filter(lang => lang.name !== name)
     })
   }
+
+  useEffect(() => {
+    setFormKey(Date.now())
+  }, [languages.length])
 
   return (
     <CharacterSheetComponent>
@@ -24,7 +29,7 @@ export function Languages() {
       <Typography variant="h4">Known</Typography>
       <List>
         {known.map(lang => (
-          <ListItem key={lang.name} secondaryAction={isEditMode && <IconButton onClick={handleDelete(lang.name)}><DeleteIcon /></IconButton>}>
+          <ListItem key={lang.id} secondaryAction={isEditMode && <IconButton onClick={handleDelete(lang.name)}><DeleteIcon /></IconButton>}>
             <ListItemText primary={lang.name} />
           </ListItem>
         ))}
@@ -32,11 +37,12 @@ export function Languages() {
       <Typography variant="h4">Not Known</Typography>
       <List>
         {notKnown.map(lang => (
-          <ListItem key={lang.name} secondaryAction={isEditMode && <IconButton onClick={handleDelete(lang.name)}><DeleteIcon /></IconButton>}>
+          <ListItem key={lang.id} secondaryAction={isEditMode && <IconButton onClick={handleDelete(lang.name)}><DeleteIcon /></IconButton>}>
             <ListItemText primary={lang.name} />
           </ListItem>
         ))}
       </List>
+      {isEditMode && <LanguageForm key={formKey} />}
     </CharacterSheetComponent>
   )
 }
