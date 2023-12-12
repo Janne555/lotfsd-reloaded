@@ -54,12 +54,13 @@ const MeleeWeaponCard = ({ weapon, ab, onDelete }: Props) => {
   return (
     <Card variant="elevation" className="w-40 text-center">
       {onDelete && <IconButton onClick={onDelete}><GridDeleteIcon /></IconButton>}
-      <CardContent>
+      <CardContent className="flex flex-col gap-2">
         <span className="font-bold">{weapon.name}</span>
         <div className="flex gap-4 justify-center">
           <Typography>{weapon.damage}</Typography>
           <Typography>AB {weapon.attackBonus + ab}</Typography>
         </div>
+        {weapon.oversized && <span className="font-bold">Oversized</span>}
       </CardContent>
     </Card>
   )
@@ -69,7 +70,7 @@ const RangedWeaponCard = ({ weapon, ab, onDelete }: Props) => {
   return (
     <Card variant="elevation" className="w-40 text-center">
       {onDelete && <IconButton onClick={onDelete}><GridDeleteIcon /></IconButton>}
-      <CardContent>
+      <CardContent className="flex flex-col gap-2">
         <span className="font-bold">{weapon.name}</span>
         <div className="flex gap-4 justify-center">
           <Typography>{weapon.damage}</Typography>
@@ -81,6 +82,7 @@ const RangedWeaponCard = ({ weapon, ab, onDelete }: Props) => {
           <Typography>M: {weapon.range?.medium}</Typography>
           <Typography>L: {weapon.range?.long}</Typography>
         </div>
+        {weapon.oversized && <span className="font-bold">Oversized</span>}
       </CardContent>
     </Card>
   )

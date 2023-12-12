@@ -1,17 +1,26 @@
-import { useAtomValue } from "jotai"
-import { chunk } from "../utils/utils"
-import { characterSheetAtom } from "../atoms"
-import { Typography } from "@mui/material"
+import { chunk, range } from "../utils/utils"
+import { IconButton, Typography } from "@mui/material"
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
+import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks"
+import React from "react"
+import { Delete } from "@mui/icons-material"
 
 export function Equipment() {
-  const { equipment } = useAtomValue(characterSheetAtom)
+  const { equipment } = useCharacterSheet()
+  const { isEditMode } = useEditMode()
+  const mutateCharSheet = useMutateTempCharSheet()
   const chunks = chunk(equipment, 5)
   let num = 0
 
   function getNext() {
     num++
     return num
+  }
+
+  const handleDeleteEquipment = (id: string) => () => {
+    mutateCharSheet(draft => {
+      draft.equipment = draft.equipment.filter(item => item.id !== id)
+    })
   }
 
   return (
@@ -22,26 +31,15 @@ export function Equipment() {
           <div className="col-start-8 row-start-1 row-end-6 border relative">
             {i > 0 && <div className="whitespace-nowrap truncate">+1 Enc</div>}
           </div>
-          <span className="col-span-6 border border-l-0 pl-2 truncate">
-            {chunk[0]?.name}
-          </span>
-          <span className="text-center border">{getNext()}</span>
-          <span className="col-span-6 border border-l-0 pl-2 truncate">
-            {chunk[1]?.name}
-          </span>
-          <span className="text-center border">{getNext()}</span>
-          <span className="col-span-6 border border-l-0 pl-2 truncate">
-            {chunk[2]?.name}
-          </span>
-          <span className="text-center border">{getNext()}</span>
-          <span className="col-span-6 border border-l-0 pl-2 truncate">
-            {chunk[3]?.name}
-          </span>
-          <span className="text-center border">{getNext()}</span>
-          <span className="col-span-6 border border-l-0 pl-2 truncate">
-            {chunk[4]?.name}
-          </span>
-          <span className="text-center border">{getNext()}</span>
+          {range(5).map(i => chunk[i]).map(item => (
+            <React.Fragment key={num}>
+              <div className="col-span-6 border border-l-0 pl-2 truncate h-10 flex items-center">
+                {isEditMode && item && <IconButton onClick={handleDeleteEquipment(item.id)}><Delete /></IconButton>}
+                <span>{item?.name}</span>
+              </div>
+              <span className="text-center border">{getNext()}</span>
+            </React.Fragment>
+          ))}
         </div>
       ))}
     </CharacterSheetComponent>

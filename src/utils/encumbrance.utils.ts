@@ -7,7 +7,7 @@ export function calculateEncumbrance(characterSheet: CharacterSheet) {
     total += 1
   }
   if (encumbrance.characterIsWearingPlateMail) {
-    total += 1
+    total += 2
   }
 
   equipment.forEach(item => {
