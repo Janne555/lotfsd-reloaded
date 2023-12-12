@@ -7,11 +7,18 @@ import { collectEffects } from "./utils/effect.utils"
 
 export function useMutateTempCharSheet() {
   const [tempCharacterSheet, setTempCharacterSheet] = useAtom(tempCharacterSheetReadWriteAtom)
-
+  const [_, refresh] = useAtom(characterSheetAtom)
+  const characterSheet = useAtomValue(characterSheetAtom)
+  const [isEditMode] = useAtom(editModeAtom)
 
   return (fn: (draft: CharacterSheet) => void) => {
-    const newSheet = produce(tempCharacterSheet, fn)
-    setTempCharacterSheet(newSheet)
+    if (isEditMode) {
+      const newSheet = produce(tempCharacterSheet, fn)
+      setTempCharacterSheet(newSheet)
+    } else {
+      const newSheet = produce(characterSheet, fn)
+      saveCharacterSheet(newSheet).then(() => refresh())
+    }
   }
 }
 

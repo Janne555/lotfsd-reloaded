@@ -5,26 +5,27 @@ import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem,
 import { deCamel } from '../utils/utils'
 import { nanoid } from 'nanoid'
 import { useMemo } from 'react'
-import { useMutateCharSheet } from '../hooks'
+import { useMutateTempCharSheet } from '../hooks'
 
 type Props = {
   onClose?: () => void
   defaultValues?: Partial<Effect>
+  onReset?: () => void
 }
 
-export const EffectForm = ({ onClose, defaultValues }: Props) => {
+export const EffectForm = ({ onClose, defaultValues, onReset }: Props) => {
   const { handleSubmit, control, formState: { errors }, watch } = useForm<Effect>({
     resolver: zodResolver(EffectSchema),
     defaultValues
   })
 
-  const mutateCharSheet = useMutateCharSheet()
+  const mutateCharSheet = useMutateTempCharSheet()
 
   const effectId = useMemo(() => nanoid(), [])
   const targetCategory = watch().targetCategory
 
   const onSubmit: SubmitHandler<Effect> = async (data) => {
-    await mutateCharSheet((draft) => {
+    mutateCharSheet((draft) => {
       if (defaultValues?.id) {
         const index = draft.effects.findIndex((effect) => effect.id === defaultValues?.id)
         draft.effects[index] = data
@@ -37,8 +38,8 @@ export const EffectForm = ({ onClose, defaultValues }: Props) => {
   }
 
   return (
-    <div className="flex flex-col h-screen items-center justify-center pointer-events-none">
-      <form onSubmit={handleSubmit(onSubmit)} className="w-screen p-4 bg-white flex flex-col gap-4 pointer-events-auto">
+    <div className="flex flex-col items-center justify-center p-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
         <Controller
           name="id"
           defaultValue={effectId}
@@ -143,7 +144,7 @@ export const EffectForm = ({ onClose, defaultValues }: Props) => {
           </>
         )}
         <div className="flex justify-evenly">
-          <Button type="button" onClick={onClose}>Cancel</Button>
+          <Button type="button" onClick={onReset}>Reset</Button>
           <Button variant='contained' type="submit">Submit</Button>
         </div>
       </form>

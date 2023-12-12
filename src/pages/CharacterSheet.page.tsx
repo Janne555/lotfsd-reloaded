@@ -32,7 +32,7 @@ export const CharacterSheetPage = () => {
 
   const navigate = useNavigate()
   const [activeSection, setActiveSection] = useState('info')
-  
+
   const { isEditMode, setEditModeOff, setEditModeOn } = useEditMode()
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -49,11 +49,14 @@ export const CharacterSheetPage = () => {
 
   const handleClose = () => navigate(`/character-sheet/${characterId}/info`)
 
-  const editButtons = (
+  const editButtons = (id: string) => (
     <div className="absolute right-4">
       {isEditMode
         ? <IconButton onClick={setEditModeOff}><Save /></IconButton>
-        : <IconButton onClick={() => setEditModeOn()}><Edit /></IconButton>
+        : <IconButton onClick={() => {
+          document.getElementById(id)?.scrollIntoView()
+          setEditModeOn()
+        }}><Edit /></IconButton>
       }
     </div>
   )
@@ -64,7 +67,7 @@ export const CharacterSheetPage = () => {
       <Button className="block mt-4 p-4" LinkComponent={NavLink} to={`/`}>Back to Character Selection</Button>
       <Typography variant="h1">Character Sheet</Typography>
       <CharacterSheetSection id="info" className="relative">
-        {editButtons}
+        {editButtons("info")}
         <Typography variant="h2">Info</Typography>
         <InfoBar />
         <Languages />
@@ -72,24 +75,24 @@ export const CharacterSheetPage = () => {
         <Effects />
       </CharacterSheetSection>
       <CharacterSheetSection id="attributes">
-        {editButtons}
+        {editButtons("attributes")}
         <Typography variant="h2">Attributes</Typography>
         <Attributes />
       </CharacterSheetSection>
       <CharacterSheetSection id="combat">
-        {editButtons}
+        {editButtons("combat")}
         <Typography variant="h2">Combat</Typography>
         <SavingThrows />
         <CombatInfo />
       </CharacterSheetSection>
       <CharacterSheetSection id="spells">
-        {editButtons}
+        {editButtons("spells")}
         <Typography variant="h2">Spells</Typography>
         <Spells />
         <SpellSlots />
       </CharacterSheetSection>
       <CharacterSheetSection id="equipment">
-        {editButtons}
+        {editButtons("equipment")}
         <Typography variant="h2">Equipment</Typography>
         <Encumbrance />
         <Armor />

@@ -1,46 +1,56 @@
 import { List, ListItem, ListItemButton, ListItemText, Switch, Typography } from '@mui/material'
-import { useEffects, useMutateCharSheet } from '../hooks'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAtomValue } from 'jotai'
-import { characterIdAtom } from '../atoms'
+import { useEditMode, useEffects, useMutateTempCharSheet } from '../hooks'
 import { CharacterSheetComponent } from '../layouts/CharacterSheetComponent'
+import { EffectForm } from '../forms/Effect.form'
+import { useState } from 'react'
 
 export function Effects() {
-  const characterId = useAtomValue(characterIdAtom)
   const effects = useEffects()
-  const handleChange = useMutateCharSheet()
-  const navigate = useNavigate()
+  const handleChange = useMutateTempCharSheet()
+  const { isEditMode } = useEditMode()
+  const [effectId, setEffectId] = useState<string>()
 
   return (
     <CharacterSheetComponent>
-      <Typography variant="h3">Effects</Typography>
-      <Link to={`/character-sheet/${characterId}/info/add-effect`}>Add Effect</Link>
-      <List>
-        {effects.map((effect, index) => (
-          <ListItem
-            disablePadding
-            disableGutters
-            key={index}
-            secondaryAction={
-              <Switch
-                edge="end"
-                onChange={(e) => {
-                  handleChange((draft) => {
-                    draft.effects[index].active = e.target.checked
-                  })
-                }}
-                checked={effect.active ?? false}
-              />}
-          >
-            <ListItemButton
-              dense
-              onClick={() => navigate(`/character-sheet/${characterId}/info/effects/${effect.id}`)}
+      <div>
+        <Typography variant="h3">Effects</Typography>
+        <List>
+          {effects.map((effect, index) => (
+            <ListItem
+              disablePadding
+              disableGutters
+              key={index}
+              secondaryAction={
+                <Switch
+                  edge="end"
+                  onChange={(e) => {
+                    handleChange((draft) => {
+                      draft.effects[index].active = e.target.checked
+                    })
+                  }}
+                  checked={effect.active ?? false}
+                />}
             >
-              <ListItemText primary={effect.name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+              <ListItemButton
+                dense
+                onClick={() => setEffectId(effect.id)}
+              >
+                <ListItemText primary={effect.name} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        {isEditMode && (
+          <div key={effectId}>
+            <Typography variant="h4">{effectId ? "Edit" : "Add"} Effect</Typography>
+            <EffectForm
+              defaultValues={effects.find((effect) => effect.id === effectId)}
+              onClose={() => setEffectId(undefined)}
+              onReset={() => setEffectId(undefined)}
+            />
+          </div>
+        )}
+      </div>
     </CharacterSheetComponent>
   )
 }
