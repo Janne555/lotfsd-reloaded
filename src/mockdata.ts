@@ -256,19 +256,19 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
   spells: [
     {
       name: 'Magic Missile',
-      level: 1,
+      level: "1",
       description: 'A missile of magical energy darts forth from your fingertip and strikes its target, dealing 1d6+1 points of force damage.',
       id: 'spell-1'
     },
     {
       name: 'Fireball',
-      level: 3,
+      level: "3",
       description: 'A fireball spell generates a searing explosion of flame that detonates with a low roar and deals 1d6 points of fire damage per caster level (maximum 10d6) to every creature within the area.',
       id: 'spell-2'
     },
     {
       name: 'Phantasamal Force',
-      level: 2,
+      level: "2",
       description: 'You tap into the nightmares of a creature you can see within range and create an illusory manifestation of its deepest fears, visible only to that creature.',
       id: 'spell-3'
     }

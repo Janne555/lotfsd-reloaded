@@ -67,7 +67,7 @@ const WeaponSchema = z.object({
 const SpellSchema = z.object({
   name: z.string(),
   description: z.string(),
-  level: z.number(),
+  level: z.string(),
   id: z.string(),
 })
 

@@ -38,117 +38,115 @@ export const EffectForm = ({ onClose, defaultValues, onReset }: Props) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
-        <Controller
-          name="id"
-          defaultValue={effectId}
-          control={control}
-          render={({ field }) => (
-            <input type="hidden" {...field} />
-          )}
-        />
-        <Controller
-          name="name"
-          defaultValue=''
-          control={control}
-          render={({ field }) => (
-            <TextField error={Boolean(errors.name)} helperText={errors.name?.message} inputProps={field} label="Name" variant='standard' />
-          )}
-        />
-        <FormControl>
-          <FormLabel error={Boolean(errors.effect)} id="effect-form-effect">Effect</FormLabel>
-          <RadioGroup
-            aria-labelledby="effect-form-effect"
-            defaultValue={defaultValues?.effect ?? "unknown"}
-            row
-          >
-            <Controller
-              name="effect"
-              control={control}
-              render={({ field: { value, ...field } }) => (
-                <FormControlLabel value="add" control={<Radio {...field} />} label="Add" />
-              )}
-            />
-            <Controller
-              name="effect"
-              control={control}
-              render={({ field: { value, ...field } }) => (
-                <FormControlLabel value="replace" control={<Radio {...field} />} label="Replace" />
-              )}
-            />
-            <Controller
-              name="effect"
-              control={control}
-              render={({ field: { value, ...field } }) => (
-                <FormControlLabel value="unknown" control={<Radio {...field} />} label="Non-effect" />
-              )}
-            />
-          </RadioGroup>
-        </FormControl>
-        <FormControl variant="standard">
-          <InputLabel id="effect-form-category">Category</InputLabel>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
+      <Controller
+        name="id"
+        defaultValue={effectId}
+        control={control}
+        render={({ field }) => (
+          <input type="hidden" {...field} />
+        )}
+      />
+      <Controller
+        name="name"
+        defaultValue=''
+        control={control}
+        render={({ field }) => (
+          <TextField error={Boolean(errors.name)} helperText={errors.name?.message} inputProps={field} label="Name" variant='standard' />
+        )}
+      />
+      <FormControl>
+        <FormLabel error={Boolean(errors.effect)} id="effect-form-effect">Effect</FormLabel>
+        <RadioGroup
+          aria-labelledby="effect-form-effect"
+          defaultValue={defaultValues?.effect ?? "unknown"}
+          row
+        >
           <Controller
-            name="targetCategory"
+            name="effect"
             control={control}
             render={({ field: { value, ...field } }) => (
-              <Select
-                className="capitalize"
-                error={Boolean(errors.targetCategory)}
-                labelId="effect-form-category"
-                label="Category"
-                defaultValue={defaultValues?.targetCategory ?? "none"}
-                {...field}
-              >
-                <MenuItem value="none" className="capitalize"></MenuItem>
-                {Object.keys(EffectSchema.shape.targetCategory.Values).map((category) => (
-                  <MenuItem key={category} value={category} className="capitalize">{deCamel(category)}</MenuItem>
-                ))}
-              </Select>
+              <FormControlLabel value="add" control={<Radio {...field} />} label="Add" />
             )}
           />
-        </FormControl>
-        {(targetCategory === 'attributes' || targetCategory === 'attributeModifier') && (
-          <>
-            <FormControl variant="standard">
-              <InputLabel id="effect-form-attribute">Attribute</InputLabel>
-              <Controller
-                name="targetSubCategory"
-                defaultValue='none'
-                control={control}
-                render={({ field: { value, ...field } }) => (
-                  <Select
-                    className="capitalize"
-                    error={Boolean(errors.targetSubCategory)}
-                    labelId="effect-form-attribute"
-                    label="Attribute"
-                    defaultValue={defaultValues?.targetSubCategory ?? "none"}
-                    {...field}
-                  >
-                    <MenuItem value="none" className="capitalize"></MenuItem>
-                    {Object.keys(AttributesSchema.shape).map((attribute) => (
-                      <MenuItem key={attribute} value={attribute} className="capitalize">{deCamel(attribute)}</MenuItem>
-                    ))}
-                  </Select>
-                )}
-              />
-            </FormControl>
+          <Controller
+            name="effect"
+            control={control}
+            render={({ field: { value, ...field } }) => (
+              <FormControlLabel value="replace" control={<Radio {...field} />} label="Replace" />
+            )}
+          />
+          <Controller
+            name="effect"
+            control={control}
+            render={({ field: { value, ...field } }) => (
+              <FormControlLabel value="unknown" control={<Radio {...field} />} label="Non-effect" />
+            )}
+          />
+        </RadioGroup>
+      </FormControl>
+      <FormControl variant="standard">
+        <InputLabel id="effect-form-category">Category</InputLabel>
+        <Controller
+          name="targetCategory"
+          control={control}
+          render={({ field: { value, ...field } }) => (
+            <Select
+              className="capitalize"
+              error={Boolean(errors.targetCategory)}
+              labelId="effect-form-category"
+              label="Category"
+              defaultValue={defaultValues?.targetCategory ?? "none"}
+              {...field}
+            >
+              <MenuItem value="none" className="capitalize"></MenuItem>
+              {Object.keys(EffectSchema.shape.targetCategory.Values).map((category) => (
+                <MenuItem key={category} value={category} className="capitalize">{deCamel(category)}</MenuItem>
+              ))}
+            </Select>
+          )}
+        />
+      </FormControl>
+      {(targetCategory === 'attributes' || targetCategory === 'attributeModifier') && (
+        <>
+          <FormControl variant="standard">
+            <InputLabel id="effect-form-attribute">Attribute</InputLabel>
             <Controller
-              name="value"
-              defaultValue=""
+              name="targetSubCategory"
+              defaultValue='none'
               control={control}
-              render={({ field }) => (
-                <TextField type="number" error={Boolean(errors.value)} helperText={errors.value?.message} inputProps={field} label="Value" variant='standard' />
+              render={({ field: { value, ...field } }) => (
+                <Select
+                  className="capitalize"
+                  error={Boolean(errors.targetSubCategory)}
+                  labelId="effect-form-attribute"
+                  label="Attribute"
+                  defaultValue={defaultValues?.targetSubCategory ?? "none"}
+                  {...field}
+                >
+                  <MenuItem value="none" className="capitalize"></MenuItem>
+                  {Object.keys(AttributesSchema.shape).map((attribute) => (
+                    <MenuItem key={attribute} value={attribute} className="capitalize">{deCamel(attribute)}</MenuItem>
+                  ))}
+                </Select>
               )}
             />
-          </>
-        )}
-        <div className="flex justify-evenly">
-          <Button type="button" onClick={onReset}>Reset</Button>
-          <Button variant='contained' type="submit">Submit</Button>
-        </div>
-      </form>
-    </div>
+          </FormControl>
+          <Controller
+            name="value"
+            defaultValue=""
+            control={control}
+            render={({ field }) => (
+              <TextField type="number" error={Boolean(errors.value)} helperText={errors.value?.message} inputProps={field} label="Value" variant='standard' />
+            )}
+          />
+        </>
+      )}
+      <div className="flex justify-evenly">
+        <Button type="button" onClick={onReset}>Reset</Button>
+        <Button variant='contained' type="submit">Submit</Button>
+      </div>
+    </form>
   )
 }
 
