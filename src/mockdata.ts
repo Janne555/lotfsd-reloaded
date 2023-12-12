@@ -275,48 +275,48 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
   ],
   spellSlots: [
     {
-      level: 1,
+      level: "1",
       preparedSpellId: 'spell-1',
       id: 'spell-slot-1',
       used: true
     },
     {
-      level: 1,
+      level: "1",
       preparedSpellId: 'spell-1',
       id: 'spell-slot-2',
       used: false
     },
     {
-      level: 1,
+      level: "1",
       id: 'spell-slot-3',
       used: false
     },
     {
-      level: 2,
+      level: "2",
       preparedSpellId: 'spell-3',
       id: 'spell-slot-4',
       used: false
     },
     {
-      level: 2,
+      level: "2",
       preparedSpellId: 'spell-3',
       id: 'spell-slot-5',
       used: false
     },
     {
-      level: 3,
+      level: "3",
       preparedSpellId: 'spell-2',
       id: 'spell-slot-6',
       used: false
     },
     {
-      level: 3,
+      level: "3",
       preparedSpellId: 'spell-2',
       id: 'spell-slot-7',
       used: false
     },
     {
-      level: 3,
+      level: "3",
       id: 'spell-slot-8',
       used: false
     },

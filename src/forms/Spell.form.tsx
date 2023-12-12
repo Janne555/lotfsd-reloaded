@@ -22,7 +22,6 @@ export const SpellForm = ({ defaultValues, onClose }: Props) => {
   const mutateCharSheet = useMutateTempCharSheet()
 
   const onSubmit: SubmitHandler<Spell> = (data) => {
-    console.log(data)
     mutateCharSheet((draft) => {
       const index = draft.spells.findIndex((spell) => spell.id === defaultValues?.id)
       if (index >= 0) {

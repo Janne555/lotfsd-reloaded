@@ -1,25 +1,37 @@
-import { useAtomValue } from "jotai";
-import { characterSheetAtom } from "../atoms";
-import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Checkbox, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { calculateSpellSlots } from "../utils/spellSlot.utils";
-import { useMutateCharSheet } from "../hooks";
+import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks";
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent";
+import { SpellSlotForm } from "../forms/SpellSlot.form";
+import { useEffect, useState } from "react";
+import { Delete } from "@mui/icons-material";
 
 export function SpellSlots() {
-  const { spellSlots, spells } = useAtomValue(characterSheetAtom)
-  const mutateCharSheet = useMutateCharSheet()
-  const sorted = [...spellSlots].sort((a, b) => a.level - b.level)
+  const { spellSlots, spells } = useCharacterSheet()
+  const mutateCharSheet = useMutateTempCharSheet()
+  const sorted = [...spellSlots].sort((a, b) => Number(a.level) - Number(b.level))
   const spellSlotCountsAndRemainingSpellSlots = calculateSpellSlots(spellSlots)
+  const [key, setKey] = useState(Date.now())
+  const { isEditMode } = useEditMode()
+
+  useEffect(() => {
+    setKey(Date.now())
+  }, [spellSlots])
 
   const findSpellForSlot = (spellId?: string) => {
     const spell = spells.find((s) => s.id === spellId)
     return spell ? spell.name : "<Not prepared>"
   }
 
+  const handleDelete = (id: string) => () => {
+    mutateCharSheet((draft) => {
+      draft.spellSlots = draft.spellSlots.filter((slot) => slot.id !== id)
+    })
+  }
+
   return (
     <CharacterSheetComponent>
       <Typography variant="h3">Spell Slots</Typography>
-      <Typography variant="h4">Totals</Typography>
       <TableContainer>
         <Table>
           <TableHead>
@@ -45,7 +57,7 @@ export function SpellSlots() {
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Level</TableCell>
-              <TableCell>Used</TableCell>
+              <TableCell>{isEditMode ? "Delete" : "Used"}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -54,20 +66,33 @@ export function SpellSlots() {
                 <TableCell>{findSpellForSlot(spellSlot.preparedSpellId)}</TableCell>
                 <TableCell>{spellSlot.level}</TableCell>
                 <TableCell>
-                  <Checkbox
-                    checked={spellSlot.used}
-                    onChange={(e) => {
-                      mutateCharSheet((ch) => {
-                        const slot = ch.spellSlots.find((s) => s.id === spellSlot.id)
-                        if (slot) {
-                          slot.used = e.target.checked
-                        }
-                      })
-                    }}
-                  />
+                  {isEditMode
+                    ? <IconButton onClick={handleDelete(spellSlot.id)}><Delete /></IconButton>
+                    : <Checkbox
+                      checked={spellSlot.used}
+                      onChange={(e) => {
+                        mutateCharSheet((ch) => {
+                          const slot = ch.spellSlots.find((s) => s.id === spellSlot.id)
+                          if (slot) {
+                            slot.used = e.target.checked
+                          }
+                        })
+                      }}
+                    />
+                  }
                 </TableCell>
               </TableRow>
             ))}
+            {isEditMode && (
+              <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+                <TableCell colSpan={3}>
+                  <div className="flex items-center gap-4">
+                    <span className="font-bold">Add Spellslot</span>
+                    <SpellSlotForm key={key} />
+                  </div>
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

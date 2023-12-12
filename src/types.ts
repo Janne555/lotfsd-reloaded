@@ -72,7 +72,7 @@ const SpellSchema = z.object({
 })
 
 const SpellSlotSchema = z.object({
-  level: z.number(),
+  level: z.string(),
   preparedSpellId: z.string().optional(),
   id: z.string(),
   used: z.boolean()
