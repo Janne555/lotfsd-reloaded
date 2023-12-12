@@ -3,7 +3,6 @@ import { characterSheetAtom } from "../atoms"
 import { deCamel } from "../utils/utils"
 import { encumbranceValueToState } from "../utils/encumbrance.utils"
 import { calculateEncumbrance } from "../utils/encumbrance.utils"
-import { Typography } from "@mui/material"
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
 
 export function Encumbrance() {
@@ -14,7 +13,6 @@ export function Encumbrance() {
 
   return (
     <CharacterSheetComponent>
-      <Typography variant='h3'>Encumbrance</Typography>
       <div className="grid grid-cols-2 gap-x-4">
         <span className="">State</span>
         <span className="capitalize">{deCamel(state)}</span>

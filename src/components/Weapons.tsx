@@ -1,33 +1,87 @@
-import { useAtomValue } from "jotai"
-import { characterSheetAtom } from "../atoms"
-import { Typography } from "@mui/material"
+import { Card, CardContent, IconButton, Typography } from "@mui/material"
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
+import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks"
+import { Weapon } from "../types"
+import { calculateAttackBonus } from "../utils/ab.utils"
+import { Add } from "@mui/icons-material"
+import { GridDeleteIcon } from "@mui/x-data-grid"
 
 export function Weapons() {
-  const { weapons } = useAtomValue(characterSheetAtom)
+  const characterSheet = useCharacterSheet()
+  const { weapons } = characterSheet
+  const { isEditMode } = useEditMode()
+  const meleeAB = calculateAttackBonus('meleeAB', characterSheet)
+  const rangedAB = calculateAttackBonus('rangedAB', characterSheet)
+  const mutateCharSheet = useMutateTempCharSheet()
+
+  const handleDeleteWeapon = (id: string) => () => {
+    mutateCharSheet(draft => {
+      draft.weapons = draft.weapons.filter(weapon => weapon.id !== id)
+    })
+  }
+
   return (
     <CharacterSheetComponent>
       <Typography variant="h3">Weapons</Typography>
-      <div className="flex flex-col gap-x-2">
-        {weapons.map((weapon, i) => (
-          <div key={i} className="grid grid-cols-12 border-b last:border-b-0">
-            <span className="col-span-full truncate">{weapon.name}</span>
-            <span className="font-bold">AB</span>
-            <span className="col-span-2 truncate">{weapon.attackBonus}</span>
-            <span className="col-span-3 font-bold">Damage</span>
-            <span className="col-span-6 truncate">{weapon.damage}</span>
-            {Boolean(weapon.range) &&
-              <div className="col-span-full grid grid-cols-12">
-                <span className="font-bold">S</span>
-                <span className="col-span-3 truncate">{weapon.range?.short}</span>
-                <span className="font-bold">M</span>
-                <span className="col-span-3 truncate">{weapon.range?.medium}</span>
-                <span className="font-bold">L</span>
-                <span className="col-span-3 truncate">{weapon.range?.long}</span>
-              </div>}
-          </div>
-        ))}
+      <div className="flex flex-wrap gap-4">
+        {weapons.map((weapon) => {
+          if (weapon.range) {
+            return <RangedWeaponCard key={weapon.id} weapon={weapon} ab={rangedAB} onDelete={isEditMode ? handleDeleteWeapon(weapon.id) : undefined} />
+          } else {
+            return <MeleeWeaponCard key={weapon.id} weapon={weapon} ab={meleeAB} onDelete={isEditMode ? handleDeleteWeapon(weapon.id) : undefined} />
+          }
+        })}
+        {isEditMode && (
+          <Card variant="elevation" className="w-40 text-center">
+            <CardContent>
+              <Typography variant="h5">Add Weapon</Typography>
+              <IconButton><Add /></IconButton>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </CharacterSheetComponent>
+  )
+}
+
+type Props = {
+  weapon: Weapon
+  ab: number
+  onDelete?: () => void
+}
+
+const MeleeWeaponCard = ({ weapon, ab, onDelete }: Props) => {
+  return (
+    <Card variant="elevation" className="w-40 text-center">
+      {onDelete && <IconButton onClick={onDelete}><GridDeleteIcon /></IconButton>}
+      <CardContent>
+        <span className="font-bold">{weapon.name}</span>
+        <div className="flex gap-4 justify-center">
+          <Typography>{weapon.damage}</Typography>
+          <Typography>AB {weapon.attackBonus + ab}</Typography>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+const RangedWeaponCard = ({ weapon, ab, onDelete }: Props) => {
+  return (
+    <Card variant="elevation" className="w-40 text-center">
+      {onDelete && <IconButton onClick={onDelete}><GridDeleteIcon /></IconButton>}
+      <CardContent>
+        <span className="font-bold">{weapon.name}</span>
+        <div className="flex gap-4 justify-center">
+          <Typography>{weapon.damage}</Typography>
+          <Typography>AB {weapon.attackBonus + ab}</Typography>
+        </div>
+        <span className="font-bold">Range</span>
+        <div className="flex gap-4 justify-center">
+          <Typography>S: {weapon.range?.short}</Typography>
+          <Typography>M: {weapon.range?.medium}</Typography>
+          <Typography>L: {weapon.range?.long}</Typography>
+        </div>
+      </CardContent>
+    </Card>
   )
 }

@@ -1,4 +1,4 @@
-import { Checkbox, FormControl, IconButton, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Checkbox, FormControl, IconButton, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { calculateSpellSlots } from "../utils/spellSlot.utils";
 import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks";
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent";
