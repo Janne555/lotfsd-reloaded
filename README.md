@@ -35,3 +35,4 @@
   - quantity
   - equipped
   - effects
+  - oversized

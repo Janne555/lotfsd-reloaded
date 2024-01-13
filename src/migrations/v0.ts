@@ -1,5 +1,12 @@
 import { z } from "zod"
 
+export const migrate = async (input: any) => {
+  if (input.version === 0) {
+    return DatabaseSchema.parse(input)
+  }
+  throw new Error("Invalid database version")
+}
+
 const AttributeSchema = z.object({
   value: z.number()
 })
@@ -161,51 +168,3 @@ const DatabaseSchema = z.object({
   version: z.number(),
   characterSheets: z.array(CharacterSheetSchema),
 })
-
-export {
-  AttributeSchema,
-  SavingThrowSchema,
-  AttackBonusSchema,
-  HitPointsSchema,
-  SurpriseChanceSchema,
-  ArmorClassSchema,
-  ActivitySchema,
-  EncumbranceSchema,
-  LanguageSchema,
-  ItemSchema,
-  WeaponSchema,
-  SpellSchema,
-  CombatOptionSchema,
-  InfoSchema,
-  AttributesSchema,
-  SavingThrowsSchema,
-  CombatInfoSchema,
-  ArmorClassesSchema,
-  CharacterSheetSchema,
-  EffectSchema,
-  SpellSlotSchema,
-  DatabaseSchema
-}
-
-export type Attribute = z.infer<typeof AttributeSchema>
-export type SavingThrow = z.infer<typeof SavingThrowSchema>
-export type AttackBonus = z.infer<typeof AttackBonusSchema>
-export type HitPoints = z.infer<typeof HitPointsSchema>
-export type SurpriseChance = z.infer<typeof SurpriseChanceSchema>
-export type ArmorClass = z.infer<typeof ArmorClassSchema>
-export type Activity = z.infer<typeof ActivitySchema>
-export type Encumbrance = z.infer<typeof EncumbranceSchema>
-export type Language = z.infer<typeof LanguageSchema>
-export type Item = z.infer<typeof ItemSchema>
-export type Weapon = z.infer<typeof WeaponSchema>
-export type Spell = z.infer<typeof SpellSchema>
-export type CombatOption = z.infer<typeof CombatOptionSchema>
-export type Info = z.infer<typeof InfoSchema>
-export type Attributes = z.infer<typeof AttributesSchema>
-export type SavingThrows = z.infer<typeof SavingThrowsSchema>
-export type CombatInfo = z.infer<typeof CombatInfoSchema>
-export type ArmorClasses = z.infer<typeof ArmorClassesSchema>
-export type CharacterSheet = z.infer<typeof CharacterSheetSchema>
-export type Effect = z.infer<typeof EffectSchema>
-export type SpellSlot = z.infer<typeof SpellSlotSchema>
-export type Database = z.infer<typeof DatabaseSchema>

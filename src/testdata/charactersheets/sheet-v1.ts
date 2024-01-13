@@ -1,49 +1,45 @@
-import { generateMock } from '@anatine/zod-mock'
-import { CharacterSheet, CharacterSheetSchema } from './types'
-
-const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
-  ...generateMock(CharacterSheetSchema),
-  id: i.toString(),
+export const CharacterSheetV1 = {
+  id: 'v1-sheet',
   activities: [
     {
-      id: Math.random().toString(),
+      id: '1',
       name: 'Climb',
-      value: Math.ceil(Math.random() * 6),
+      value: 3,
     },
     {
-      id: Math.random().toString(),
+      id: '2',
       name: 'Stealth',
-      value: Math.ceil(Math.random() * 6),
+      value: 3,
     },
     {
-      id: Math.random().toString(),
+      id: '3',
       name: 'Bushcraft',
-      value: Math.ceil(Math.random() * 6),
+      value: 3,
     },
     {
-      id: Math.random().toString(),
+      id: '4',
       name: 'Languages',
-      value: Math.ceil(Math.random() * 6),
+      value: 3,
     },
     {
-      id: Math.random().toString(),
+      id: '5',
       name: 'Open Doors',
-      value: Math.ceil(Math.random() * 6),
+      value: 3,
     },
     {
-      id: Math.random().toString(),
+      id: '6',
       name: 'Search',
-      value: Math.ceil(Math.random() * 6),
+      value: 3,
     },
     {
-      id: Math.random().toString(),
+      id: '7',
       name: 'Sneac Attack',
-      value: Math.ceil(Math.random() * 6),
+      value: 3,
     },
     {
-      id: Math.random().toString(),
+      id: '8',
       name: 'Architecture',
-      value: Math.ceil(Math.random() * 6),
+      value: 3,
     }
   ],
   weapons: [
@@ -52,10 +48,10 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
       damage: '1d6',
       oversized: false,
       attackBonus: 1,
-      id: Math.random().toString(),
+      id: '9',
     },
     {
-      id: Math.random().toString(),
+      id: '10',
       name: 'Bow',
       damage: '1d6',
       range: {
@@ -67,14 +63,14 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
       attackBonus: 1,
     },
     {
-      id: Math.random().toString(),
+      id: '11',
       name: 'Greatsword',
       damage: '1d10',
       oversized: true,
       attackBonus: 1,
     },
     {
-      id: Math.random().toString(),
+      id: '12',
       name: 'Greatbow',
       damage: '1d10',
       range: {
@@ -88,57 +84,57 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
   ],
   equipment: [
     {
-      id: Math.random().toString(),
+      id: '13',
       name: 'Rope',
       oversized: false,
     },
     {
-      id: Math.random().toString(),
+      id: '14',
       name: 'Torch',
       oversized: false,
     },
     {
-      id: Math.random().toString(),
+      id: '15',
       name: 'Lantern',
       oversized: false,
     },
     {
-      id: Math.random().toString(),
+      id: '16',
       name: 'Backpack',
       oversized: false,
     },
     {
-      id: Math.random().toString(),
+      id: '17',
       name: 'Candle',
       oversized: false,
     },
     {
-      id: Math.random().toString(),
+      id: '18',
       name: 'Flint & Steel',
       oversized: false,
     },
     {
-      id: Math.random().toString(),
+      id: '19',
       name: 'Waterskin',
       oversized: false,
     },
     {
-      id: Math.random().toString(),
+      id: '20',
       name: 'Rations',
       oversized: false,
     },
     {
-      id: Math.random().toString(),
+      id: '21',
       name: 'Bedroll',
       oversized: false,
     },
     {
-      id: Math.random().toString(),
+      id: '22',
       name: 'Tent',
       oversized: false,
     },
     {
-      id: Math.random().toString(),
+      id: '23',
       name: 'Crowbar',
       oversized: false,
     }
@@ -179,7 +175,7 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
       targetCategory: 'attributes',
       targetSubCategory: 'strength',
       value: "1",
-      id: Math.random().toString(),
+      id: '24',
       name: 'Strength +1',
     },
     {
@@ -187,7 +183,7 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
       targetCategory: 'attributeModifier',
       targetSubCategory: 'intelligence',
       value: "1",
-      id: Math.random().toString(),
+      id: '25',
       name: 'Int +1',
     },
     {
@@ -195,7 +191,7 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
       targetCategory: 'savingThrows',
       targetSubCategory: 'paralyze',
       value: "1",
-      id: Math.random().toString(),
+      id: '26',
       name: 'Paralyze +1',
     }
   ],
@@ -323,45 +319,41 @@ const characterSheets = Array.from({ length: 1 }, (_, i): CharacterSheet => ({
   ],
   languages: [
     {
-      id: Math.random().toString(),
+      id: '28',
       name: 'Common',
       isKnown: true,
     },
     {
-      id: Math.random().toString(),
+      id: '29',
       name: 'Kääpiötonttu',
       isKnown: false,
     },
     {
-      id: Math.random().toString(),
+      id: '30',
       name: 'Käärmetonttu',
       isKnown: false,
     },
     {
-      id: Math.random().toString(),
+      id: '31',
       name: 'Ancient common',
       isKnown: false,
     }
   ],
   nonEncumberingEquipment: [
     {
-      id: Math.random().toString(),
+      id: '32',
       name: 'Locket',
       oversized: false
     }
   ],
   combatOptions: [
     {
-      id: Math.random().toString(),
+      id: '33',
       name: 'Cleave',
     }
-  ]
-}))
-
-export const mockData = {
-  characterSheets,
-  database: {
-    version: 1,
-    characterSheets
+  ],
+  encumbrance: {
+    characterIsWearingChainMail: false,
+    characterIsWearingPlateMail: false
   }
 }

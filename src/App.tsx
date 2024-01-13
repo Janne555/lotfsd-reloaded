@@ -7,6 +7,8 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 import { LoadingPage } from './pages/Loading.page'
 import { CharacterSheetPage } from './pages/CharacterSheet.page'
 import { Page } from './layouts/Page'
+import { useAtom } from 'jotai'
+import { initAtom } from './atoms'
 
 const theme = createTheme({
   typography: {
@@ -34,8 +36,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-          <Suspense fallback={<LoadingPage />}>
-            <div ref={rootRef} />
+        <Suspense fallback={<LoadingPage />}>
+          <div ref={rootRef} />
+          <InitContainer>
             <Routes>
               <Route path="/" element={<StartPage />} />
               <Route path="/character-sheet/new" element={<NotFoundPage />} />
@@ -50,10 +53,16 @@ function App() {
               } />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
-          </Suspense>
+          </InitContainer>
+        </Suspense>
       </BrowserRouter>
     </ThemeProvider >
   )
 }
 
 export default App
+
+const InitContainer = ({ children }: { children: React.ReactNode }) => {
+  useAtom(initAtom)
+  return children
+}

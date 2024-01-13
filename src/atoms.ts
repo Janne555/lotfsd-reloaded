@@ -1,5 +1,5 @@
 import { Getter, atom } from "jotai"
-import { getCharacterSheet, getCharacterSheets } from "./pages/storage"
+import { getCharacterSheet, getCharacterSheets, init } from "./pages/storage"
 import { CharacterSheet } from "./types"
 
 export function atomWithRefresh<T>(fn: (get: Getter) => T) {
@@ -17,6 +17,10 @@ export function atomWithRefresh<T>(fn: (get: Getter) => T) {
 export const characterSheetsAtom = atomWithRefresh(() => getCharacterSheets())
 
 export const characterIdAtom = atom<string | undefined>(undefined)
+
+export const initAtom = atom(async () => {
+  await init({})
+})
 
 export const characterSheetAtom = atomWithRefresh(async (get) => {
   const characterId = get(characterIdAtom)
