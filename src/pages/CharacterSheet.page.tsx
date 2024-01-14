@@ -66,7 +66,7 @@ export const CharacterSheetPage = () => {
       {/* @ts-ignore */}
       <Button className="block mt-4 p-4" LinkComponent={NavLink} to={`/`}>Back to Character Selection</Button>
       <Typography variant="h1">Character Sheet</Typography>
-      <CharacterSheetSection id="info" className="relative">
+      <CharacterSheetSection id="info">
         {editButtons("info")}
         <Typography variant="h2">Info</Typography>
         <InfoBar />

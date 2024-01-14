@@ -1,6 +1,7 @@
 import localForage from 'localforage'
 import { CharacterSheet, Database, DatabaseSchema } from '../types'
 import { migrateDatabase } from '../migrations'
+import { nanoid } from 'nanoid'
 
 type InitOptions = {
   useDemoData?: boolean
@@ -62,6 +63,68 @@ export async function saveCharacterSheet(characterSheet: CharacterSheet) {
   } catch (error) {
     console.error('Error saving character sheet:', error)
   }
+}
+
+export const createCharacterSheet = async () => {
+  const characterSheet: CharacterSheet = {
+    activities: [],
+    armorClasses: {
+      melee: { value: 0 },
+      ranged: { value: 0 },
+      surprised: { value: 0 },
+      withoutShield: { value: 0 }
+    },
+    combatInfo: {
+      baseAB: { value: 0 },
+      currentHP: { value: 0 },
+      maxHP: { value: 0 },
+      meleeAB: { value: 0 },
+      rangedAB: { value: 0 },
+      surpriseChance: { value: 0 },
+      tempHP: { value: 0 }
+    },
+    equipment: [],
+    id: nanoid(),
+    attributes: {
+      strength: { value: 0 },
+      dexterity: { value: 0 },
+      constitution: { value: 0 },
+      intelligence: { value: 0 },
+      wisdom: { value: 0 },
+      charisma: { value: 0 }
+    },
+    combatOptions: [],
+    effects: [],
+    encumbrance: {
+      characterIsWearingChainMail: false,
+      characterIsWearingPlateMail: false,
+    },
+    info: {
+      age: 0,
+      alignment: '',
+      class: '',
+      currentXp: 0,
+      gender: '',
+      name: 'New Character' + Math.floor(Math.random() * 1000),
+      race: '',
+      xpForNextLevel: 0
+    },
+    languages: [],
+    nonEncumberingEquipment: [],
+    savingThrows: {
+      breathWeapon: { value: 0 },
+      magic: { value: 0 },
+      magicalDevice: { value: 0 },
+      paralyze: { value: 0 },
+      poison: { value: 0 }
+    },
+    spells: [],
+    weapons: [],
+    spellSlots: []
+  }
+  characterSheet.id = nanoid()
+  await saveCharacterSheet(characterSheet)
+  return characterSheet
 }
 
 export async function resetStorage() {

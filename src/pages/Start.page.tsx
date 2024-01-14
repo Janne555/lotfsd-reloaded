@@ -4,15 +4,16 @@ import { Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText } fr
 import { useNavigate } from "react-router-dom"
 import FaceIcon from '@mui/icons-material/Face'
 import Typography from '@mui/material/Typography'
-import { resetStorage } from "./storage"
+import { createCharacterSheet, resetStorage } from "./storage"
 import { Page } from "../layouts/Page"
 
 export const StartPage = () => {
   const characterSheets = useAtomValue(characterSheetsAtom)
   const navigate = useNavigate()
 
-  const handleAddNew = () => {
-    navigate('/character-sheet/new')
+  const handleAddNew = async () => {
+    const characterSheet = await createCharacterSheet()
+    navigate(`/character-sheet/${characterSheet.id}`)
   }
 
   return (
