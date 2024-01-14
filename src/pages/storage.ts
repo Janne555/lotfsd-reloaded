@@ -129,5 +129,17 @@ export const createCharacterSheet = async () => {
 
 export async function resetStorage() {
   await localForage.clear()
-  init({ useDemoData: true })
+  init({})
+}
+
+export async function exportDatabase() {
+  const database = await localForage.getItem<Database>(databaseKey)
+  const data = JSON.stringify(database)
+  const blob = new Blob([data], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'character-sheets.json'
+  a.click()
+  URL.revokeObjectURL(url)
 }

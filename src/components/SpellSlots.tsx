@@ -1,6 +1,6 @@
 import { Checkbox, FormControl, IconButton, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { calculateSpellSlots } from "../utils/spellSlot.utils";
-import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks";
+import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks/useStorage";
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent";
 import { SpellSlotForm } from "../forms/SpellSlot.form";
 import { useEffect, useState } from "react";

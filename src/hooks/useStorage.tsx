@@ -1,9 +1,9 @@
 import { useAtom, useAtomValue } from "jotai"
-import { characterSheetAtom, editModeAtom, tempCharacterSheetReadWriteAtom } from "./atoms"
+import { characterSheetAtom, editModeAtom, tempCharacterSheetReadWriteAtom } from "../atoms"
 import { produce } from "immer"
-import { CharacterSheet } from "./types"
-import { saveCharacterSheet } from "./pages/storage"
-import { collectEffects } from "./utils/effect.utils"
+import { CharacterSheet } from "../types"
+import { saveCharacterSheet } from "../pages/storage"
+import { collectEffects } from "../utils/effect.utils"
 
 export function useMutateTempCharSheet() {
   const [tempCharacterSheet, setTempCharacterSheet] = useAtom(tempCharacterSheetReadWriteAtom)

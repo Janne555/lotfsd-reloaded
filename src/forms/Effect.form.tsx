@@ -5,7 +5,7 @@ import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem,
 import { deCamel } from '../utils/utils'
 import { nanoid } from 'nanoid'
 import { useMemo } from 'react'
-import { useMutateTempCharSheet } from '../hooks'
+import { useMutateTempCharSheet } from '../hooks/useStorage'
 
 type Props = {
   onClose?: () => void

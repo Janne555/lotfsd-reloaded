@@ -1,7 +1,7 @@
 import { partition } from "../utils/utils"
 import { IconButton, List, ListItem, ListItemText, Typography } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks"
+import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks/useStorage"
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
 import { LanguageForm } from "../forms/Language.form"
 import { useEffect, useState } from "react"

@@ -1,6 +1,6 @@
 import { Button, IconButton, Typography } from "@mui/material"
 import { Briefcase4Line, DiceIcon, FileListLineIcon, InformationIcon, MagicFillIcon, SwordIcon } from "../icons"
-import { useEditMode } from "../hooks"
+import { useEditMode } from "../hooks/useStorage"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 

@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai'
 import { characterSheetAtom } from '../atoms'
 import { Checkbox, FormControlLabel, Typography } from '@mui/material'
-import { useMutateCharSheet } from '../hooks'
+import { useMutateCharSheet } from '../hooks/useStorage'
 import { CharacterSheetComponent } from '../layouts/CharacterSheetComponent'
 
 export const Armor = () => {

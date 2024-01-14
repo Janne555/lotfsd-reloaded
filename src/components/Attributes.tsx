@@ -1,7 +1,7 @@
 import { Attributes as AttributesType } from '../types'
 import { editModeAtom } from '../atoms'
 import { useAtomValue } from 'jotai'
-import { useMutateTempCharSheet, useCharacterSheet } from '../hooks'
+import { useMutateTempCharSheet, useCharacterSheet } from '../hooks/useStorage'
 import { calculateAttributeModifier } from "../utils/attributes.utils"
 import { calculateAttributeValue } from "../utils/attributes.utils"
 import { CharacterSheetComponent } from '../layouts/CharacterSheetComponent'

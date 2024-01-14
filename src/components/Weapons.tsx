@@ -1,6 +1,6 @@
 import { Card, CardContent, IconButton, Typography } from "@mui/material"
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
-import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks"
+import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks/useStorage"
 import { Weapon } from "../types"
 import { calculateAttackBonus } from "../utils/ab.utils"
 import { Add } from "@mui/icons-material"

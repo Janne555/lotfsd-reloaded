@@ -1,4 +1,4 @@
-import { useEditMode } from "../hooks"
+import { useEditMode } from "../hooks/useStorage"
 
 export const FloatingSaveButton = () => {
   const { setEditModeOff, isEditMode } = useEditMode()

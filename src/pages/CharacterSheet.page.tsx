@@ -20,7 +20,7 @@ import { Navigation } from "../components/Navigation"
 import { Button, IconButton, Typography } from "@mui/material"
 import { CharacterSheetSection } from "../layouts/CharacterSheetSection"
 import { useEffect, useState } from "react"
-import { useEditMode } from "../hooks"
+import { useEditMode } from "../hooks/useStorage"
 import { Edit, Save } from "@mui/icons-material"
 
 export const CharacterSheetPage = () => {

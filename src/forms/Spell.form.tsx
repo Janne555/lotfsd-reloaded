@@ -1,7 +1,7 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { Spell, SpellSchema } from "../types"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutateTempCharSheet } from "../hooks"
+import { useMutateTempCharSheet } from "../hooks/useStorage"
 import { Button, TextField } from "@mui/material"
 
 type Props = {

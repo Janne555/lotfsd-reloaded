@@ -4,7 +4,7 @@ import { Add, Close, Delete, Edit, Info } from "@mui/icons-material"
 import React, { useState } from "react"
 import { nanoid } from "nanoid"
 import { SpellForm } from "../forms/Spell.form"
-import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks"
+import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks/useStorage"
 
 export function Spells() {
   const { spells } = useCharacterSheet()

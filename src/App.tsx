@@ -9,6 +9,7 @@ import { CharacterSheetPage } from './pages/CharacterSheet.page'
 import { Page } from './layouts/Page'
 import { useAtom } from 'jotai'
 import { initAtom } from './atoms'
+import { DialogProvider } from './hooks/useDialog'
 
 const theme = createTheme({
   typography: {
@@ -35,27 +36,29 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Suspense fallback={<LoadingPage />}>
-          <div ref={rootRef} />
-          <InitContainer>
-            <Routes>
-              <Route path="/" element={<StartPage />} />
-              <Route path="/character-sheet/new" element={<NotFoundPage />} />
-              <Route path="/character-sheet/:id/*" element={
-                <ErrorBoundary>
-                  <Suspense fallback={<LoadingPage />}>
-                    <Page>
-                      <CharacterSheetPage />
-                    </Page>
-                  </Suspense>
-                </ErrorBoundary>
-              } />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </InitContainer>
-        </Suspense>
-      </BrowserRouter>
+      <DialogProvider>
+        <BrowserRouter>
+          <Suspense fallback={<LoadingPage />}>
+            <div ref={rootRef} />
+            <InitContainer>
+              <Routes>
+                <Route path="/" element={<StartPage />} />
+                <Route path="/character-sheet/new" element={<NotFoundPage />} />
+                <Route path="/character-sheet/:id/*" element={
+                  <ErrorBoundary>
+                    <Suspense fallback={<LoadingPage />}>
+                      <Page>
+                        <CharacterSheetPage />
+                      </Page>
+                    </Suspense>
+                  </ErrorBoundary>
+                } />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </InitContainer>
+          </Suspense>
+        </BrowserRouter>
+      </DialogProvider>
     </ThemeProvider >
   )
 }

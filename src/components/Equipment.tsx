@@ -1,7 +1,7 @@
 import { chunk, range } from "../utils/utils"
 import { IconButton, Typography } from "@mui/material"
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
-import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks"
+import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from "../hooks/useStorage"
 import React from "react"
 import { Delete } from "@mui/icons-material"
 

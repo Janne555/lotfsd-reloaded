@@ -1,7 +1,7 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { SpellSlot, SpellSlotSchema } from "../types"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutateTempCharSheet } from "../hooks"
+import { useMutateTempCharSheet } from "../hooks/useStorage"
 import { IconButton, TextField } from "@mui/material"
 import { nanoid } from "nanoid"
 import { Add } from "@mui/icons-material"

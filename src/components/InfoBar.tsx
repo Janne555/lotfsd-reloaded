@@ -2,7 +2,7 @@ import { useAtomValue } from "jotai"
 import React from "react"
 import { editModeAtom } from "../atoms"
 import { deCamel } from "../utils/utils"
-import { useMutateTempCharSheet, useCharacterSheet } from "../hooks"
+import { useMutateTempCharSheet, useCharacterSheet } from "../hooks/useStorage"
 import { Info } from "../types"
 import { CharacterSheetComponent } from "../layouts/CharacterSheetComponent"
 

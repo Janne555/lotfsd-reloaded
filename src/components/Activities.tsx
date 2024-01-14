@@ -1,7 +1,7 @@
 import { Box, IconButton, Typography } from '@mui/material'
 import { deCamel } from '../utils/utils'
 import { DieFace } from './DieFace'
-import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from '../hooks'
+import { useCharacterSheet, useEditMode, useMutateTempCharSheet } from '../hooks/useStorage'
 import { Add, Delete } from '@mui/icons-material'
 import { nanoid } from 'nanoid'
 import { CharacterSheetComponent } from '../layouts/CharacterSheetComponent'
